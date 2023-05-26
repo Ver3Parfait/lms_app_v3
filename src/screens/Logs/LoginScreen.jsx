@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Image, TouchableWithoutFeedback, View, Text, Button, StyleSheet } from "react-native";
+import { Image, View, Text, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -15,11 +15,6 @@ const LoginScreen = ({ navigation }) => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const renderIconPassword = (props) => (
-    <TouchableWithoutFeedback onPress={onPasswordIconPress}>
-      <Icon {...props} name={passwordVisible ? 'eye-off' : "eye"} />
-    </TouchableWithoutFeedback>
-  );
 
   const Login = async () => {
     setLoading(true)
@@ -67,7 +62,11 @@ const LoginScreen = ({ navigation }) => {
               />
               <TextInput
                 secureTextEntry={!passwordVisible}
-                right={renderIconPassword}
+                right={    
+                <TextInput.Icon 
+                icon={passwordVisible ? 'eye-off' : "eye"}
+                onPress={onPasswordIconPress}/>
+              }
                 style={styles.input}
                 placeholder="password"
                 value={password}
@@ -105,8 +104,8 @@ const styles = StyleSheet.create({
     fontWeight: "400"
   },
   input: {
-    color: "success",
-    marginTop: 20
+    marginTop: 20,
+    width:'100%'
   },
   signInButton: {
     marginHorizontal: 16,
