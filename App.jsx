@@ -20,7 +20,6 @@ export default function App() {
       <NavigationContainer>
         <MainNavigator />
       </NavigationContainer>
-
     </PaperProvider>
   );
 }
