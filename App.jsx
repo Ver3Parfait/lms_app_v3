@@ -8,6 +8,8 @@ import { useColorScheme } from "react-native";
 import { default as colorsLight } from "./colors_light.json";
 import { default as colorsDark } from "./colors_dark.json";
 import MainNavigator from "./src/navigators/MainNavigator";
+// import { Provider } from 'react-redux';
+// import { store } from './src/store';
 
 export default function App() {
   const colorScheme = useColorScheme();
@@ -16,10 +18,12 @@ export default function App() {
       ? { ...DefaultTheme, ...colorsDark }
       : { ...DefaultTheme, ...colorsLight };
   return (
-    <PaperProvider theme={paperTheme}>
-      <NavigationContainer>
-        <MainNavigator />
-      </NavigationContainer>
-    </PaperProvider>
+    // <Provider store={store}>
+      <PaperProvider theme={paperTheme}>
+        <NavigationContainer>
+          <MainNavigator />
+        </NavigationContainer>
+      </PaperProvider>
+    // </Provider>
   );
 }
