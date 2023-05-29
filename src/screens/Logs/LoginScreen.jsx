@@ -3,7 +3,7 @@ import { Image, View, Text, Button, StyleSheet } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ActivityIndicator, Icon, TextInput } from "react-native-paper";
+import { ActivityIndicator, TextInput } from "react-native-paper";
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
@@ -14,7 +14,6 @@ const LoginScreen = ({ navigation }) => {
   const onPasswordIconPress = () => {
     setPasswordVisible(!passwordVisible);
   };
-
 
   const Login = async () => {
     setLoading(true)
