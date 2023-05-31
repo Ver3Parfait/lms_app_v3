@@ -8,12 +8,12 @@ const MainStack = createStackNavigator()
 const MainNavigator = () => {
     return (
         <MainStack.Navigator
-            initialRouteName='SplashScreen'
+            // initialRouteName='SplashScreen'
             screenOptions={{ headerShown: false, gestureEnabled: false }}>
             {/* <MainStack.Screen></MainStack.Screen> le splash screen avec le check token : 
                 si token : traitement /me puis redirect bottomtab
                 sinon login screen*/}
-            <MainStack.Screen
+            {/* <MainStack.Screen
                 name="SplashScreen"
                 component={SplashScreen}
                 options={{ title: "Ecran de démarrage" }} />
@@ -21,7 +21,7 @@ const MainNavigator = () => {
                 name="LoginScreen"
                 component={LoginScreen}
                 options={{ title: "Se connecter" }}
-            />
+            /> */}
             <MainStack.Screen
                 name="BottomTabNavigator"
                 component={BottomTabNavigator}
