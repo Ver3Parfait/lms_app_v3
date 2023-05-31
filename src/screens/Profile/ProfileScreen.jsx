@@ -73,54 +73,6 @@ export default function ProfileScreen({navigation}) {
               <List.Item title="Option 3" />
               <List.Item title="Option 4" />
             </List.Accordion>
-            <List.Accordion
-              id="support"
-              title="Support"
-              left={(props) => (
-                <List.Icon {...props} icon="account-group-outline" />
-              )}
-            >
-              <List.Item title="FAQ" />
-              <List.Item title="Contactez-nous" />
-              <List.Item title="Assistance en ligne" />
-              <List.Item title="Forum de la communauté" />
-            </List.Accordion>
-            <List.Accordion
-              id="support2"
-              title="Support 2"
-              left={(props) => (
-                <List.Icon {...props} icon="account-group-outline" />
-              )}
-            >
-              <List.Item title="FAQ" />
-              <List.Item title="Contactez-nous" />
-              <List.Item title="Assistance en ligne" />
-              <List.Item title="Forum de la communauté" />
-            </List.Accordion>
-            <List.Accordion
-              id="support3"
-              title="Support 3"
-              left={(props) => (
-                <List.Icon {...props} icon="account-group-outline" />
-              )}
-            >
-              <List.Item title="FAQ" />
-              <List.Item title="Contactez-nous" />
-              <List.Item title="Assistance en ligne" />
-              <List.Item title="Forum de la communauté" />
-            </List.Accordion>
-            <List.Accordion
-              id="support4"
-              title="Support 4"
-              left={(props) => (
-                <List.Icon {...props} icon="account-group-outline" />
-              )}
-            >
-              <List.Item title="FAQ" />
-              <List.Item title="Contactez-nous" />
-              <List.Item title="Assistance en ligne" />
-              <List.Item title="Forum de la communauté" />
-            </List.Accordion>
           </List.AccordionGroup>
         </List.Section>
       </ScrollView>
@@ -131,7 +83,7 @@ export default function ProfileScreen({navigation}) {
 const getStyles = (theme) => {
   return StyleSheet.create({
     items: {
-      backgroundColor:useTheme().colors.primary
+      backgroundColor: theme.colors.primary
     },
     container: {
       flex: 1,
