@@ -47,24 +47,20 @@ export default function DrawerContent(props) {
           <Drawer.Section style={styles.drawerSection}>
             <Drawer.Item
               icon="home-outline"
-              label="Acceuil"
-              onPress={() => { props.navigation.navigate('Home')}} />
+              label="Accueil"
+              onPress={() => { props.navigation.navigate('HomeScreen')}} />
             <Drawer.Item
               icon="account-outline"
               label="Compte"
-              onPress={() => {props.navigation.navigate('Home') }} />
+              onPress={() => {props.navigation.navigate('ProfileScreen') }} />
             <Drawer.Item
               icon="heart-outline"
               label="Favoris"
-              onPress={() => {props.navigation.navigate('Home') }} />
+              onPress={() => {props.navigation.navigate('HomeScreen') }} />
             <Drawer.Item
               icon="cog-outline"
               label="Paramètres"
-              onPress={() => { props.navigation.navigate('Home')}} />
-            <Drawer.Item
-              icon="lifebuoy"
-              label="Support"
-              onPress={() => { props.navigation.navigate('Home')}} />
+              onPress={() => { props.navigation.navigate('ProfileScreen')}} />
           </Drawer.Section>
 
           <Drawer.Section title="Préférences">
