@@ -1,7 +1,7 @@
 import { StyleSheet, View, FlatList } from "react-native";
 import { Text } from "react-native-paper";
 import { Card } from "react-native-paper";
-import React from "react";
+
 
 export default CertificationCard = ({ data, navigation }) => {
   const renderItem = ({ item }) => (

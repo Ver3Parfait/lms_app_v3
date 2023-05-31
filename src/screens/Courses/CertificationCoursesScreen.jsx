@@ -1,7 +1,6 @@
-import React from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { CourseList } from "../../components/CourseList.component";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 export default CertificationCoursesScreen = ({ navigation }) => {
   const data = [];
 

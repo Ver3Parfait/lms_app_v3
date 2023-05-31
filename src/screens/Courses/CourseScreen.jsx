@@ -1,8 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Dimensions } from "react-native";
+import { StyleSheet, View } from "react-native";
 import Video from "react-native-youtube-iframe";
 import ListAccordion from "../../components/ListAccordion";
-
 
 export default function CourseScreen() {
   const data = [];

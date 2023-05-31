@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet, ScrollView, View } from "react-native";
-import { CourseList } from "../../components/CourseList.component";
-import { SafeAreaView } from "react-native-safe-area-context";
 import CertificationCard from "../../components/CertificationCard";
+
 const CertificationsScreen = ({ navigation }) => {
   const data = [];
 

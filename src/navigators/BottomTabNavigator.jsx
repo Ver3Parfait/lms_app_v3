@@ -1,4 +1,3 @@
-import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useTheme } from "react-native-paper";
@@ -10,12 +9,12 @@ const Tab = createMaterialBottomTabNavigator();
 
 export default function BottomTabNavigator() {
   const theme = useTheme();
-  theme.colors.secondaryContainer = "transperent";
+  theme.colors.secondaryContainer = theme.colors.surface;
   return (
     <Tab.Navigator
-      activeColor="#000000"
-      inactiveColor="#000000"
-      barStyle={{ backgroundColor: "#FFFFFF" }}
+      activeColor={theme.colors.onBackground}
+      inactiveColor={theme.colors.onBackground}
+      barStyle={{ backgroundColor: theme.colors.background }}
     >
       <Tab.Screen
         name="HomeScreen"

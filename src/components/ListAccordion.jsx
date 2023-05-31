@@ -1,4 +1,3 @@
-import React from "react";
 import { List, Text } from "react-native-paper";
 import { TouchableOpacity, FlatList, StyleSheet, View } from "react-native";
 

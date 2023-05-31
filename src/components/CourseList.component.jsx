@@ -1,4 +1,3 @@
-import React from "react";
 import {  Text, IconButton } from "react-native-paper";
 import { TouchableOpacity, FlatList, StyleSheet, View } from "react-native";
 import { Image } from "react-native";

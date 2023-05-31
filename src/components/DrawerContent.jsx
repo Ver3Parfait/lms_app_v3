@@ -1,9 +1,9 @@
-import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Avatar, Title, Caption, Drawer, Text, Switch } from "react-native-paper";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from "../store/slices/themeSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function DrawerContent(props) {
   const dispatch = useDispatch()
@@ -47,7 +47,7 @@ export default function DrawerContent(props) {
           <Drawer.Section style={styles.drawerSection}>
             <Drawer.Item
               icon="home-outline"
-              label="Acceuil"
+              label="Accueil"
               onPress={() => { props.navigation.navigate('Home')}} />
             <Drawer.Item
               icon="account-outline"
@@ -82,7 +82,10 @@ export default function DrawerContent(props) {
         <Drawer.Item
           icon="arrow-left"
           label="Déconnexion"
-          onPress={() => { }}
+          onPress={() => {
+            AsyncStorage.removeItem('token')
+            navigation.navigate('LoginScreen')
+           }}
         />
       </Drawer.Section>
     </View>
