@@ -1,26 +1,35 @@
-import HomeScreen from "../screens/HomeScreen";
-import ProfileStack from "./ProfileNavigator";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { useTheme } from "react-native-paper";
+import HomeScreen from "../screens/HomeScreen";
+import ProfileNavigator from "./ProfileNavigator";
 import CoursesNavigator from "./CoursesNavigator";
 
 const Tab = createMaterialBottomTabNavigator();
 
-const BottomTabNavigator = () => {
+export default function BottomTabNavigator() {
+  const theme = useTheme();
+  theme.colors.secondaryContainer = "transperent";
   return (
     <Tab.Navigator
-      initialRouteName="HomeScreen"
-      screenOptions={{
-        tabBarActiveTintColor: "#e91e63",
-      }}>
+      activeColor="#000000"
+      inactiveColor="#000000"
+      barStyle={{ backgroundColor: "#FFFFFF" }}
+    >
       <Tab.Screen
         name="HomeScreen"
         component={HomeScreen}
         options={{
-          tabBarLabel: "Home",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+          tabBarLabel: "Accueil",
+          tabBarIcon: ({ color, focused }) => (
+            <Icon
+              name={focused ? "home" : "home-outline"}
+              size={24}
+              color={color}
+            />
           ),
+          headerShown: true,
         }}
       />
       <Tab.Screen
@@ -28,24 +37,30 @@ const BottomTabNavigator = () => {
         component={CoursesNavigator}
         options={{
           tabBarLabel: "Formations",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="menu" color={color} size={size} />
+          tabBarIcon: ({ color, focused }) => (
+            <Icon
+            name={focused ? "school" : "school-outline"}
+            size={24}
+            color={color}
+          />
           ),
         }}
       />
       <Tab.Screen
-        name="Profile"
-        component={ProfileStack}
+        name="ProfileNavigator"
+        component={ProfileNavigator}
         options={{
-          headerShown: false,
-          tabBarLabel: "Profile",
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
+          tabBarLabel: "Compte",   
+          tabBarIcon: ({ color, focused }) => (
+            <Icon
+            name={focused ? "account" : "account-outline"}
+            size={24}
+            color={color}
+          />
           ),
         }}
       />
     </Tab.Navigator>
   );
-};
+}
 
-export default BottomTabNavigator;
