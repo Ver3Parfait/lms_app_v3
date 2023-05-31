@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Image, View, Text, Button, StyleSheet } from "react-native";
+import { Image, View, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { ActivityIndicator, TextInput } from "react-native-paper";
+import { ActivityIndicator, TextInput, Text, useTheme } from "react-native-paper";
 
 const LoginScreen = ({ navigation }) => {
+  const { colors } = useTheme();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -35,7 +36,7 @@ const LoginScreen = ({ navigation }) => {
         {
           loading ? (
             <>
-              <ActivityIndicator animated={true} />
+              <ActivityIndicator animated={true} size='large' />
             </>
           ) : (
             <>
@@ -45,11 +46,10 @@ const LoginScreen = ({ navigation }) => {
                 source={require('../../../assets/logoRI7.png')}
               />
               <Text
-                category='h1'
+                variant="displayMedium"
                 style={styles.text}
-                status="primary"
               >
-                Connexion
+                connexion
               </Text>
               <TextInput
                 style={styles.input}
@@ -58,14 +58,16 @@ const LoginScreen = ({ navigation }) => {
                 onChangeText={(e) => setEmail(e)}
                 autoCapitalize="none"
                 autoCorrect={false}
+                mode={"outlined"}
               />
               <TextInput
                 secureTextEntry={!passwordVisible}
-                right={    
-                <TextInput.Icon 
-                icon={passwordVisible ? 'eye-off' : "eye"}
-                onPress={onPasswordIconPress}/>
-              }
+                right={
+                  <TextInput.Icon
+                    icon={passwordVisible ? 'eye-off' : "eye"}
+                    onPress={onPasswordIconPress} />
+                }
+                mode={"outlined"}
                 style={styles.input}
                 placeholder="password"
                 value={password}
@@ -73,13 +75,13 @@ const LoginScreen = ({ navigation }) => {
                 autoCapitalize="none"
                 autoCorrect={false}
               />
-              <Button
-                style={styles.signInButton}
-                title="connexion"
+              <TouchableOpacity
                 onPress={Login}
-              >
-                Connexion
-              </Button>
+                style={[styles.signInButton, { backgroundColor: colors.primary }]}>
+                <Text
+                  style={styles.signInText}>connexion</Text>
+              </TouchableOpacity>
+
             </>
           )}
       </View>
@@ -98,18 +100,30 @@ const styles = StyleSheet.create({
     paddingHorizontal: 40,
   },
   text: {
-    textTransform: "capitalize",
+    textTransform: "uppercase",
     marginVertical: 10,
-    fontWeight: "400"
+    fontWeight: "400",
   },
   input: {
     marginTop: 20,
-    width:'100%'
+    width: '100%'
   },
   signInButton: {
-    marginHorizontal: 16,
-    marginTop: 30,
+    marginVertical: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    elevation: 3,
     width: "100%"
+  },
+  signInText: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: 'bold',
+    letterSpacing: 0.25,
+    color: 'white',
+    textTransform: "uppercase"
   },
   image: {
     width: 200,

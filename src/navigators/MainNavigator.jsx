@@ -10,9 +10,6 @@ const MainNavigator = () => {
         <MainStack.Navigator
             initialRouteName='SplashScreen'
             screenOptions={{ headerShown: false, gestureEnabled: false }}>
-            {/* <MainStack.Screen></MainStack.Screen> le splash screen avec le check token : 
-                si token : traitement /me puis redirect bottomtab
-                sinon login screen*/}
             <MainStack.Screen
                 name="SplashScreen"
                 component={SplashScreen}
@@ -27,7 +24,6 @@ const MainNavigator = () => {
                 component={BottomTabNavigator}
                 options={{ title: "Accueil" }}
             />
-
         </MainStack.Navigator>
     )
 }
