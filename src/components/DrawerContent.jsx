@@ -2,13 +2,17 @@ import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { Avatar, Title, Caption, Drawer, Text, Switch } from "react-native-paper";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleTheme } from "../store/slices/themeSlice";
 
 export default function DrawerContent(props) {
-  const [isDarkTheme, setIsDarkTheme] = useState(false);
+  const dispatch = useDispatch()
 
-  const toggleTheme = () => {
-    setIsDarkTheme(!isDarkTheme);
+  const {theme} = useSelector((state) => state.theme)
+  const changeTheme = () => {
+    dispatch(toggleTheme())
   }
+
 
   return (
     <View style={{ flex: 1 }}>
@@ -67,10 +71,7 @@ export default function DrawerContent(props) {
             <Drawer.Item
               label="Thème Sombre"
               right={() => (
-                <Switch
-                  value={isDarkTheme}
-                  onValueChange={toggleTheme}
-                />
+                <Switch value={theme === "light" } onChange={changeTheme} />
               )}
             />
           </Drawer.Section>
@@ -126,4 +127,11 @@ const styles = StyleSheet.create({
     borderTopColor: '#f4f4f4',
     borderTopWidth: 1,
   },
-});
+  container: {
+    paddingVertical: 10
+  },
+  button: {
+    width: '100%',
+    height: '100%'
+  }
+})

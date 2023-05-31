@@ -33,8 +33,7 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-webview": "11.26.0",
     "react-native-youtube-iframe": "^2.2.2",
-    "react-native-ytdl": "^4.8.3",
-    "redux": "^4.2.1"
+    "react-native-ytdl": "^4.8.3"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

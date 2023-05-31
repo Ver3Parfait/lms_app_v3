@@ -8,9 +8,14 @@ const Me = (data) => {
   return api.get('/api/me', data)
 }
 
+const RefreshToken = (data) => {
+  return api.get('/api/refresh_token', data)
+}
+
 const AuthServices = {
   Login,
-  Me
+  Me,
+  RefreshToken
 };
 
 export default AuthServices;
