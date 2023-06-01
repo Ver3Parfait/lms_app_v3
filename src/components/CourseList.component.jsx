@@ -10,30 +10,30 @@ export default CourseList = ({ data, navigation }) => {
       key={item.id.toString()}
       onPress={() => navigation.navigate("CourseScreen", { CourseId: item.id })}
     >
-      <Surface style={styles.container} >
+      <Surface elevation={0} mode="flat"  style={styles.container} >
         {item.imageUrl ? (
           <Image style={styles.Image} source={{ uri: item.imageUrl }} />
         ) : (
-          <Surface style={styles.Image}>
+          <Surface elevation={0} mode="flat"  style={styles.Image}>
             <Text style={styles.Index}>{item.index}</Text>
           </Surface>
         )}
-        <Surface style={styles.Infos}>
-          <Surface style={styles.InfosRow}>
-            <Surface style={styles.TitleContainer}>
+        <Surface elevation={0} mode="flat"  style={styles.Infos}>
+          <Surface elevation={0} mode="flat"  style={styles.InfosRow}>
+            <Surface elevation={0} mode="flat"  style={styles.TitleContainer}>
               <Text style={styles.Title}>{item.name}</Text>
               <Text style={styles.description}>{item.description}</Text>
             </Surface>
             {item.icon ? (
-              <Surface style={styles.IconContainer}>
+              <Surface elevation={0} mode="flat"  style={styles.IconContainer}>
                 <IconButton icon={item.icon} color="black" onPress={() => {}} />
               </Surface>
             ) : (
-              <Surface style={styles.IconContainer}></Surface>
+              <Surface elevation={0} mode="flat"  style={styles.IconContainer}></Surface>
             )}
           </Surface>
 
-          <Surface>{/* Futur ajout d'une barre de progression */}</Surface>
+          <Surface elevation={0} mode="flat" >{/* Futur ajout d'une barre de progression */}</Surface>
         </Surface>
       </Surface>
     </TouchableRipple>

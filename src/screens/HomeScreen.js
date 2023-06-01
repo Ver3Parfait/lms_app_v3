@@ -16,8 +16,8 @@ import HeaderPageComponent from "../components/HeaderPage.component";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function HomeScreen({ navigation }) {
   const theme = useTheme();
+  const styles = getStyles(theme);
   const insets = useSafeAreaInsets();
-  const styles = getStyles(theme, insets);
   const [switchValue, setSwitchValue] = useState(1);
   const courses = [];
 
@@ -47,10 +47,10 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <Surface style={styles.container}>
-      <HeaderPageComponent />
-      <Surface style={styles.scrollSurface}>
-        <Surface style={styles.header}>
+    <Surface elevation={1} mode="flat"  style={styles.container}>
+      <HeaderPageComponent Invisble/>
+      <Surface elevation={0} mode="flat"  style={styles.scrollSurface}>
+        <Surface elevation={0} mode="flat"  style={styles.header}>
           <Text style={styles.greeting}>
             Bonjour <Text style={styles.username}>Militello Lucas</Text>
           </Text>
@@ -67,7 +67,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableRipple>
         </Surface>
 
-        <Surface style={styles.searchContainer}>
+        <Surface elevation={0} mode="flat"  style={styles.searchContainer}>
           <TextInput
             mode="outlined"
             label="Rechercher"
@@ -76,8 +76,8 @@ export default function HomeScreen({ navigation }) {
           />
         </Surface>
 
-        <Surface style={styles.switchContainer}>
-          <Surface style={styles.switchButtonGroup}>
+        <Surface elevation={0} mode="flat"  style={styles.switchContainer}>
+          <Surface elevation={0} mode="flat"  style={styles.switchButtonGroup}>
             <Button
               mode={switchValue === 1 ? "contained" : "outlined"}
               onPress={() => handleSwitchChange(1)}
@@ -95,7 +95,7 @@ export default function HomeScreen({ navigation }) {
           </Surface>
         </Surface>
 
-        <Surface style={styles.sectionContainer}>
+        <Surface elevation={0} mode="flat"  style={styles.sectionContainer}>
           {switchValue === 1 ? (
             <Text style={styles.sectionTitle}>Les plus consultée</Text>
           ) : (
@@ -118,14 +118,13 @@ export default function HomeScreen({ navigation }) {
 HomeScreen.navigationOptions = {
   title: "Accueil", // Titre de l'écran
 };
-const getStyles = (theme, insets) => {
+const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
       height: "100%",
-      paddingTop: insets.top
     },
     scrollSurface: {
-      height: "100%",
+      height:'90%',
       padding: 20,
     },
     header: {

@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import {  StyleSheet, ScrollView } from "react-native";
 import { Avatar, Title, Caption, List, Surface } from "react-native-paper";
 import { useTheme } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import HeaderPageComponent from "../../components/HeaderPage.component";
 
 export default function ProfileScreen({navigation}) {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const insets = useSafeAreaInsets()
   const [expanded, setExpanded] = useState(false);
 
   const handleAccordionToggle = () => {
@@ -15,16 +14,17 @@ export default function ProfileScreen({navigation}) {
   };
 
   return (
-    <Surface style={[styles.container,{paddingTop: insets.top}]}>
-      <Surface style={styles.userInfoSection}>
-        <Surface style={styles.userInfo}>
+    <Surface elevation={1} mode="flat"  style={styles.container}>
+      <HeaderPageComponent Icon="microsoft-xbox-controller-menu" Drawer/>
+      <Surface elevation={0} mode="flat"  style={styles.userInfoSection}>
+        <Surface elevation={0} mode="flat"  style={styles.userInfo}>
           <Avatar.Image
             source={{
               uri: "https://i.pinimg.com/236x/6f/24/37/6f24371638c703bd61d3c67dc51762e1.jpg",
             }}
             size={80}
           />
-          <Surface style={styles.userDetails}>
+          <Surface elevation={0} mode="flat"  style={styles.userDetails}>
             <Title style={styles.title}>Militello Lucas</Title>
             <Caption style={styles.caption}>Apprenti</Caption>
           </Surface>
@@ -49,14 +49,14 @@ export default function ProfileScreen({navigation}) {
         </List.Accordion>
       </List.Section>
 
-      <Surface style={styles.section}>
+      <Surface elevation={0} mode="flat"  style={styles.section}>
         <Title style={styles.sectionTitle}>Cours</Title>
-        <Surface style={styles.infoBoxWrapper}>
-          <Surface style={styles.infoBox}>
+        <Surface elevation={0} mode="flat"  style={styles.infoBoxWrapper}>
+          <Surface elevation={0} mode="flat"  style={styles.infoBox}>
             <Title style={styles.infoBoxTitle}>90</Title>
             <Caption style={styles.infoBoxCaption}>En cours</Caption>
           </Surface>
-          <Surface style={[styles.infoBox, styles.infoBoxSeparator]}>
+          <Surface elevation={0} mode="flat"  style={[styles.infoBox, styles.infoBoxSeparator]}>
             <Title style={styles.infoBoxTitle}>150</Title>
             <Caption style={styles.infoBoxCaption}>Terminés</Caption>
           </Surface>

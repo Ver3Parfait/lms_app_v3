@@ -1,12 +1,11 @@
 import { StyleSheet } from "react-native";
 import { Surface, useTheme } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import CourseListComponent from '../../components/CourseList.component'
+import HeaderPageComponent from "../../components/HeaderPage.component";
 
 export default CertificationCoursesScreen = ({ navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const insets = useSafeAreaInsets()
   const data = [];
 
   for (let i = 0; i < 60; i++) {
@@ -22,7 +21,8 @@ export default CertificationCoursesScreen = ({ navigation }) => {
   }
 
   return (
-    <Surface style={[styles.container, {paddingTop:insets.top}]}>
+    <Surface elevation={1} mode="flat"  style={styles.container}>
+      <HeaderPageComponent/>
       <CourseListComponent navigation={navigation} data={data}/>
     </Surface>
 
