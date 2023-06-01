@@ -1,3 +1,4 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
 
 const themeSlice = createSlice({
@@ -6,8 +7,9 @@ const themeSlice = createSlice({
     theme:"dark",
   },
   reducers: {
-    toggleTheme: (state,action) => {       
+    toggleTheme: async (state,action) => {       
       state.theme = state.theme === "light" ? 'dark' : "light"
+      await AsyncStorage.setItem('theme',state.theme)
     },
   },
 });
