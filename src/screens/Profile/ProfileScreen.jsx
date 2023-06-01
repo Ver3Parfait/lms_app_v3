@@ -87,13 +87,10 @@ const getStyles = (theme) => {
     },
     container: {
       flex: 1,
-      backgroundColor: "#fff",
     },
     userInfoSection: {
       paddingHorizontal: 30,
       paddingBottom: 25,
-      borderBottomColor: "#e0e0e0",
-      borderBottomWidth: 1,
     },
     userInfo: {
       flexDirection: "row",
@@ -132,12 +129,6 @@ const getStyles = (theme) => {
       flex: 1,
       alignItems: "center",
       justifyContent: "center",
-      borderTopWidth: 1,
-      borderTopColor: "#e0e0e0",
-    },
-    infoBoxSeparator: {
-      borderLeftWidth: 1,
-      borderLeftColor: "#e0e0e0",
     },
     infoBoxTitle: {
       fontSize: 24,

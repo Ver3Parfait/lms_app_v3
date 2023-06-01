@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { Surface } from "react-native-paper";
 import Video from "react-native-youtube-iframe";
 import ListAccordion from "../../components/ListAccordion";
 
@@ -17,18 +18,17 @@ export default function CourseScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={styles.VideoContainer}>
+    <Surface style={styles.container}>
+      <Surface style={styles.VideoContainer}>
         <Video
           videoId={"HRkr2r3Rf0A"}
           height={225}
-          play={true}
         />
-      </View>
-        <View style={styles.CourseList}>
+      </Surface>
+        <Surface style={styles.CourseList}>
           <ListAccordion data={data} />
-        </View>
-    </View>
+        </Surface>
+    </Surface>
   );
 }
 

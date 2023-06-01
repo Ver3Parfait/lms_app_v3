@@ -1,7 +1,7 @@
-import React, { useState } from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { useState } from "react";
+import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, TextInput, Avatar, Button } from "react-native-paper";
+import { Text, TextInput, Avatar, Button, Surface, TouchableRipple } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CertificationCard from "../components/CertificationCard";
 
@@ -36,12 +36,12 @@ export default function HomeScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.scrollView}>
-        <View style={styles.header}>
+      <Surface style={styles.scrollSurface}>
+        <Surface style={styles.header}>
           <Text style={styles.greeting}>
             Bonjour <Text style={styles.username}>Militello Lucas</Text>
           </Text>
-          <TouchableOpacity
+          <TouchableRipple
             onPress={() => navigation.navigate("ProfileNavigator")}
           >
             <Avatar.Image
@@ -51,20 +51,20 @@ export default function HomeScreen({ navigation }) {
               size={40}
               style={styles.avatar}
             />
-          </TouchableOpacity>
-        </View>
+          </TouchableRipple>
+        </Surface>
 
-        <View style={styles.searchContainer}>
+        <Surface style={styles.searchContainer}>
           <TextInput
             mode="outlined"
             label="Rechercher"
             style={styles.searchInput}
             right={<TextInput.Icon name="search" />}
           />
-        </View>
+        </Surface>
 
-        <View style={styles.switchContainer}>
-          <View style={styles.switchButtonGroup}>
+        <Surface style={styles.switchContainer}>
+          <Surface style={styles.switchButtonGroup}>
             <Button
               mode={switchValue === 1 ? "contained" : "outlined"}
               onPress={() => handleSwitchChange(1)}
@@ -79,24 +79,24 @@ export default function HomeScreen({ navigation }) {
             >
               <Icon name={"new-box"} size={20} />
             </Button>
-          </View>
-        </View>
+          </Surface>
+        </Surface>
 
-        <View style={styles.sectionContainer}>
+        <Surface style={styles.sectionContainer}>
           {switchValue === 1 ? (
             <Text style={styles.sectionTitle}>Les plus consultée</Text>
           ) : (
             <Text style={styles.sectionTitle}>Les derniers cours</Text>
           )}
-          <TouchableOpacity
-            onPress={() => navigation.navigate("CoursesNavigator")}
+          <TouchableRipple
+            onPress={() => navigation.navigate("CourseNavigator")}
           >
             <Text style={styles.sectionLink}>Tout voir</Text>
-          </TouchableOpacity>
-        </View>
+          </TouchableRipple>
+        </Surface>
 
         <CertificationCard data={switchValue === 1 ? courses : latestCourses} />
-      </View>
+      </Surface>
     </SafeAreaView>
   );
 }
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  scrollView: {
+  scrollSurface: {
     flex: 1,
     padding: 20,
   },

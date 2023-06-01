@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet} from "react-native";
+import { Surface } from "react-native-paper";
 import CertificationCard from "../../components/CertificationCard";
 
 const CertificationsScreen = ({ navigation }) => {
@@ -17,9 +17,9 @@ const CertificationsScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <CertificationCard navigation={navigation} data={data}/>
-    </View>
+    </Surface>
 
   );
 };

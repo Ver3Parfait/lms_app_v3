@@ -2,7 +2,6 @@ import CertificationScreen from "../screens/Courses/CertificationsScreen";
 import CertificationCoursesScreen from "../screens/Courses/CertificationCoursesScreen";
 import CourseScreen from "../screens/Courses/CourseScreen";
 import { createStackNavigator } from "@react-navigation/stack";
-import FullScreenCourseScreen from "../screens/Courses/FullScreenCourse";
 
 const CourseStack = createStackNavigator();
 
@@ -26,11 +25,6 @@ export default CoursesNavigator = () => {
         name="CourseScreen"
         component={CourseScreen}
         options={{ title: "Détail du cours" }}
-      />
-          <CourseStack.Screen
-        name="FullScreenCourse"
-        component={FullScreenCourseScreen}
-        options={{ headerShown: false }}
       />
     </CourseStack.Navigator>
   );
