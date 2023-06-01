@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
+import { StyleSheet } from "react-native";
+import { Surface } from "react-native-paper";
 import { CourseList } from "../../components/CourseList.component";
-import { SafeAreaView } from "react-native-safe-area-context";
+
 export default CertificationCoursesScreen = ({ navigation }) => {
   const data = [];
 
@@ -18,9 +18,9 @@ export default CertificationCoursesScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <CourseList navigation={navigation} data={data}/>
-    </View>
+    </Surface>
 
   );
 };

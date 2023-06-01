@@ -1,8 +1,7 @@
-import React from "react";
-import { StyleSheet, ScrollView, View } from "react-native";
-import { CourseList } from "../../components/CourseList.component";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { StyleSheet} from "react-native";
+import { Surface } from "react-native-paper";
 import CertificationCard from "../../components/CertificationCard";
+
 const CertificationsScreen = ({ navigation }) => {
   const data = [];
 
@@ -18,9 +17,9 @@ const CertificationsScreen = ({ navigation }) => {
   }
 
   return (
-    <View style={styles.container}>
+    <Surface style={styles.container}>
       <CertificationCard navigation={navigation} data={data}/>
-    </View>
+    </Surface>
 
   );
 };

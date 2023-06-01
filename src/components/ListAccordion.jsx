@@ -1,6 +1,5 @@
-import React from "react";
-import { List, Text } from "react-native-paper";
-import { TouchableOpacity, FlatList, StyleSheet, View } from "react-native";
+import { List, Text, TouchableRipple, Surface } from "react-native-paper";
+import { FlatList, StyleSheet } from "react-native";
 
 const ListAccordion = ({ data }) => {
   const renderItem = ({ item }) => (
@@ -10,23 +9,25 @@ const ListAccordion = ({ data }) => {
       left={(props) => <List.Icon {...props} icon={item.icon} />}
     >
       {item.courses.map((course) => (
-        <TouchableOpacity
+        <TouchableRipple
           key={`${course.id}-${course.title}`}
           style={styles.container}
         >
-          <View style={styles.Image}>
-            <Text style={styles.Index}>#</Text>
-          </View>
-          <View style={styles.Infos}>
-            <View style={styles.InfosRow}>
-              <View style={styles.TitleContainer}>
-                <Text style={styles.Title}>{course.title}</Text>
-              </View>
-              <View style={styles.IconContainer}></View>
-            </View>
-            <View>{/* Futur ajout d'une barre de progression */}</View>
-          </View>
-        </TouchableOpacity>
+          <Surface style={styles.surface}>
+            <Surface style={styles.image}>
+              <Text style={styles.index}>#</Text>
+            </Surface>
+            <Surface style={styles.infos}>
+              <Surface style={styles.infosRow}>
+                <Surface style={styles.titleContainer}>
+                  <Text style={styles.title}>{course.title}</Text>
+                </Surface>
+                <Surface style={styles.iconContainer}></Surface>
+              </Surface>
+              <Surface>{/* Futur ajout d'une barre de progression */}</Surface>
+            </Surface>
+          </Surface>
+        </TouchableRipple>
       ))}
     </List.Accordion>
   );
@@ -51,19 +52,24 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingLeft: 10,
-    display: "flex",
     flexDirection: "row",
     height: 80,
   },
-  Title: {
+  title: {
     fontWeight: "bold",
     fontSize: 13.5,
   },
-  TitleContainer: {
+  titleContainer: {
     flex: 1,
-    flexWrap: 'wrap', 
+    flexWrap: "wrap",
   },
-  Image: {
+  surface: {
+    flex: 1,
+    elevation: 4,
+    borderRadius: 4,
+    flexDirection: "row",
+  },
+  image: {
     width: 60,
     height: 60,
     alignItems: "center",
@@ -71,20 +77,20 @@ const styles = StyleSheet.create({
     margin: 10,
     borderRadius: 0,
   },
-  Index: {
+  index: {
     fontSize: 16,
     fontWeight: "bold",
   },
-  Infos: {
+  infos: {
     flex: 1,
     paddingRight: 10,
   },
-  InfosRow: {
+  infosRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
   },
-  IconContainer: {
+  iconContainer: {
     width: 20,
     height: 20,
     alignItems: "center",
