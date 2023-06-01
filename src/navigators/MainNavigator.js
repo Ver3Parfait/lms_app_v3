@@ -8,7 +8,7 @@ const MainStack = createStackNavigator()
 const MainNavigator = () => {
     return (
         <MainStack.Navigator
-            initialRouteName='LoginScreen'
+            initialRouteName='SplashScreen'
             screenOptions={{ headerShown: false, gestureEnabled: false }}>
             <MainStack.Screen
                 name="SplashScreen"
