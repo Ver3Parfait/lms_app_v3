@@ -107,8 +107,9 @@ const getStyles = (themes) => {
     text: {
       textTransform: "uppercase",
       marginVertical: 10,
-      fontWeight: "400",
-      color:themes.colors.primary
+      fontWeight: "500",
+      color:themes.colors.primary,
+      fontFamily:'Helvetica-Bold'
     },
     input: {
       marginTop: 20,
