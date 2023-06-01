@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { View, StyleSheet } from "react-native";
-import { Avatar, Title, Caption, Drawer, Text, Switch } from "react-native-paper";
+import { Avatar, Title, Caption, Drawer, Text, Switch, useTheme } from "react-native-paper";
 import { DrawerContentScrollView } from "@react-navigation/drawer";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleTheme } from "../store/slices/themeSlice";
 
 export default function DrawerContent(props) {
+  const themes = useTheme();
+  const styles = getStyles(themes)
   const dispatch = useDispatch()
 
   const {theme} = useSelector((state) => state.theme)
@@ -84,50 +86,51 @@ export default function DrawerContent(props) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  drawerContent: {
-    flex: 1,
-  },
-  userInfoSection: {
-    paddingLeft: 20,
-  },
-  title: {
-    fontSize: 16,
-    marginTop: 3,
-    fontWeight: 'bold',
-  },
-  caption: {
-    fontSize: 14,
-    lineHeight: 14,
-  },
-  row: {
-    marginTop: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  section: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginRight: 15,
-  },
-  paragraph: {
-    fontWeight: 'bold',
-    marginRight: 3,
-  },
-  drawerSection: {
-    marginTop: 15,
-  },
-  bottomDrawerSection: {
-    marginBottom: 15,
-    borderTopColor: '#f4f4f4',
-    borderTopWidth: 1,
-  },
-  container: {
-    paddingVertical: 10
-  },
-  button: {
-    width: '100%',
-    height: '100%'
-  }
-})
+const getStyles = (themes) => {
+  return StyleSheet.create({
+    drawerContent: {
+      flex: 1,
+    },
+    userInfoSection: {
+      paddingLeft: 20,
+    },
+    title: {
+      fontSize: 16,
+      marginTop: 3,
+      fontWeight: 'bold',
+    },
+    caption: {
+      fontSize: 14,
+      lineHeight: 14,
+    },
+    row: {
+      marginTop: 20,
+      flexDirection: 'row',
+      alignItems: 'center',
+    },
+    section: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginRight: 15,
+    },
+    paragraph: {
+      fontWeight: 'bold',
+      marginRight: 3,
+    },
+    drawerSection: {
+      marginTop: 15,
+    },
+    bottomDrawerSection: {
+      marginBottom: 15,
+      borderTopColor: '#f4f4f4',
+      borderTopWidth: 1,
+    },
+    container: {
+      paddingVertical: 10
+    },
+    button: {
+      width: '100%',
+      height: '100%'
+    }
+  })
+}

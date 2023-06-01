@@ -1,7 +1,10 @@
 import { List, Text, TouchableRipple, Surface } from "react-native-paper";
 import { FlatList, StyleSheet } from "react-native";
+import { useTheme } from "react-native-paper";
 
 const ListAccordion = ({ data }) => {
+  const theme = useTheme();
+  const styles = getStyles(theme);
   const renderItem = ({ item }) => (
     <List.Accordion
       id={item.title}
@@ -43,57 +46,58 @@ const ListAccordion = ({ data }) => {
 };
 
 export default ListAccordion;
-
-const styles = StyleSheet.create({
-  listContent: {
-    paddingVertical: 10,
-  },
-  container: {
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: 10,
-    flexDirection: "row",
-    height: 80,
-  },
-  title: {
-    fontWeight: "bold",
-    fontSize: 13.5,
-  },
-  titleContainer: {
-    flex: 1,
-    flexWrap: "wrap",
-  },
-  surface: {
-    flex: 1,
-    elevation: 4,
-    borderRadius: 4,
-    flexDirection: "row",
-  },
-  image: {
-    width: 60,
-    height: 60,
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 10,
-    borderRadius: 0,
-  },
-  index: {
-    fontSize: 16,
-    fontWeight: "bold",
-  },
-  infos: {
-    flex: 1,
-    paddingRight: 10,
-  },
-  infosRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  iconContainer: {
-    width: 20,
-    height: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
+const getStyles = (theme) => {
+  return StyleSheet.create({
+    listContent: {
+      paddingVertical: 10,
+    },
+    container: {
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingLeft: 10,
+      flexDirection: "row",
+      height: 80,
+    },
+    title: {
+      fontWeight: "bold",
+      fontSize: 13.5,
+    },
+    titleContainer: {
+      flex: 1,
+      flexWrap: "wrap",
+    },
+    surface: {
+      flex: 1,
+      elevation: 4,
+      borderRadius: 4,
+      flexDirection: "row",
+    },
+    image: {
+      width: 60,
+      height: 60,
+      alignItems: "center",
+      justifyContent: "center",
+      margin: 10,
+      borderRadius: 0,
+    },
+    index: {
+      fontSize: 16,
+      fontWeight: "bold",
+    },
+    infos: {
+      flex: 1,
+      paddingRight: 10,
+    },
+    infosRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    iconContainer: {
+      width: 20,
+      height: 20,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+  });
+}

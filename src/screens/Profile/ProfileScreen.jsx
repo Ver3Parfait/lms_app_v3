@@ -4,14 +4,14 @@ import { Avatar, Title, Caption, List, Surface } from "react-native-paper";
 import { useTheme } from "react-native-paper";
 
 export default function ProfileScreen({navigation}) {
+  const theme = useTheme();
+  const styles = getStyles(theme);
   const [expanded, setExpanded] = useState(false);
 
   const handleAccordionToggle = () => {
     setExpanded(!expanded);
   };
 
-  const theme = useTheme();
-  const styles = getStyles(theme);
   return (
     <Surface style={styles.container}>
       <Surface style={styles.userInfoSection}>

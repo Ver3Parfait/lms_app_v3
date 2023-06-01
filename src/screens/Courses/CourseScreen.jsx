@@ -1,10 +1,12 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Surface } from "react-native-paper";
+import { Surface, useTheme } from "react-native-paper";
 import Video from "react-native-youtube-iframe";
 import ListAccordion from "../../components/ListAccordion";
 
 export default function CourseScreen() {
+  const theme = useTheme();
+  const styles = getStyles(theme);
   const data = [];
 
   for (let i = 0; i < 60; i++) {
@@ -31,18 +33,19 @@ export default function CourseScreen() {
     </Surface>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
-  },
-  VideoContainer: {
-    flex: 1,
-  },
-  CourseList: {
-    flex: 2,
-  },
-});
+const getStyles = (theme) => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column",
+      justifyContent: "space-between",
+    },
+    VideoContainer: {
+      flex: 1,
+    },
+    CourseList: {
+      flex: 2,
+    },
+  });
+}
 

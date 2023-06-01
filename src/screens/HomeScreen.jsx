@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, TextInput, Avatar, Button, Surface, TouchableRipple } from "react-native-paper";
+import { Text, TextInput, Avatar, Button, Surface, TouchableRipple, useTheme } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CertificationCard from "../components/CertificationCard";
 
 export default function HomeScreen({ navigation }) {
+  const theme = useTheme();
+  const styles = getStyles(theme);
   const [switchValue, setSwitchValue] = useState(1);
   const courses = [];
 
@@ -24,8 +26,8 @@ export default function HomeScreen({ navigation }) {
     latestCourses.push({
       id: i + 1,
       name: "Cours avancer de React Native Hardcore",
-      instructor: "Fabien Walle",
-      image:
+      description: "Fabien Walle",
+      imageUrl:
         "https://images.ctfassets.net/aq13lwl6616q/2gqVi4hhjq9vgvdh63UoKZ/c763c6f7e98a80eb2800bbe5eb9d690d/react_native_zero_to_mastery.png",
     });
   }
@@ -103,81 +105,82 @@ export default function HomeScreen({ navigation }) {
 HomeScreen.navigationOptions = {
   title: "Accueil", // Titre de l'écran
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  scrollSurface: {
-    flex: 1,
-    padding: 20,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  greeting: {
-    fontSize: 24,
-    fontWeight: "bold",
-    color: "#000",
-  },
-  username: {
-    marginLeft: 10,
-  },
-  avatar: {
-    marginRight: 10,
-  },
-  searchContainer: {
-    flexDirection: "row",
-    marginBottom: 20,
-    alignItems: "center",
-  },
-  searchInput: {
-    flex: 1,
-    marginRight: 10,
-  },
-  switchContainer: {
-    marginBottom: 20,
-  },
-  switchButtonGroup: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-  },
-  switchButton: {
-    flex: 1,
-    alignSelf: "center",
-    marginRight: 10,
-  },
-  sectionContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 20,
-  },
-  sectionTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-  },
-  sectionLink: {
-    color: "#0d47a1",
-  },
-  CourseCard: {
-    marginBottom: 10,
-    borderRadius: 10,
-  },
-  CourseImage: {
-    height: 200,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
-  },
-  CourseTitle: {
-    fontWeight: "bold",
-    marginBottom: 8,
-    fontSize: 16,
-  },
-  CourseDescription: {
-    color: "#555",
-  },
-});
+const getStyles = (theme) => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+    },
+    scrollSurface: {
+      flex: 1,
+      padding: 20,
+    },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 20,
+    },
+    greeting: {
+      fontSize: 24,
+      fontWeight: "bold",
+      color: "#000",
+    },
+    username: {
+      marginLeft: 10,
+    },
+    avatar: {
+      marginRight: 10,
+    },
+    searchContainer: {
+      flexDirection: "row",
+      marginBottom: 20,
+      alignItems: "center",
+    },
+    searchInput: {
+      flex: 1,
+      marginRight: 10,
+    },
+    switchContainer: {
+      marginBottom: 20,
+    },
+    switchButtonGroup: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
+    switchButton: {
+      flex: 1,
+      alignSelf: "center",
+      marginRight: 10,
+    },
+    sectionContainer: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+      marginBottom: 20,
+    },
+    sectionTitle: {
+      fontSize: 18,
+      fontWeight: "bold",
+    },
+    sectionLink: {
+      color: "#0d47a1",
+    },
+    CourseCard: {
+      marginBottom: 10,
+      borderRadius: 10,
+    },
+    CourseImage: {
+      height: 200,
+      borderTopLeftRadius: 10,
+      borderTopRightRadius: 10,
+    },
+    CourseTitle: {
+      fontWeight: "bold",
+      marginBottom: 8,
+      fontSize: 16,
+    },
+    CourseDescription: {
+      color: "#555",
+    },
+  });
+}
