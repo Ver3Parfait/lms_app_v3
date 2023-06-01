@@ -1,26 +1,17 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import {
-  Avatar,
-  Title,
-  Caption,
-  Drawer,
-  Text,
-  Switch,
-  Surface,
-  useTheme
-} from "react-native-paper";
+import { Avatar, Title, Caption,  Drawer, Text, Switch, Surface, useTheme} from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../store/slices/themeSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function DrawerContent(props) {
-  const theme = useTheme();
+  const themes = useTheme();
   const styles = getStyles(theme);
   const dispatch = useDispatch();
 
-  const { themes } = useSelector((state) => state.theme);
+  const { theme } = useSelector((state) => state.theme);
   const changeTheme = () => {
     dispatch(toggleTheme());
   };
@@ -90,7 +81,7 @@ export default function DrawerContent(props) {
             <Drawer.Item
               label="Thème Sombre"
               right={() => (
-                <Switch value={themes === "light"} onValueChange={changeTheme} />
+                <Switch value={theme === "light"} onValueChange={changeTheme} />
               )}
             />
           </Drawer.Section>
@@ -110,7 +101,7 @@ export default function DrawerContent(props) {
     </SafeAreaView>
   );
 }
-const getStyles = (theme) => {
+const getStyles = (themes) => {
   return StyleSheet.create({
     container: {
       flex: 1,
@@ -149,8 +140,6 @@ const getStyles = (theme) => {
     },
     bottomDrawerSection: {
       marginBottom: 15,
-      borderTopColor: "#f4f4f4",
-      borderTopWidth: 1,
     },
   });
 }

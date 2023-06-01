@@ -1,8 +1,10 @@
 import { StyleSheet} from "react-native";
-import { Surface } from "react-native-paper";
+import { Surface, useTheme } from "react-native-paper";
 import CertificationCard from "../../components/CertificationCard";
 
 const CertificationsScreen = ({ navigation }) => {
+  const theme = useTheme();
+  const styles = getStyles(theme);
   const data = [];
 
   for (let i = 0; i < 60; i++) {
@@ -23,12 +25,13 @@ const CertificationsScreen = ({ navigation }) => {
 
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: "column",
-  },
-});
+const getStyles = (theme) => {
+  return StyleSheet.create({
+    container: {
+      flex: 1,
+      flexDirection: "column",
+    },
+  });
+}
 
 export default CertificationsScreen;
