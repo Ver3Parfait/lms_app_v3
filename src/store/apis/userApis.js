@@ -1,16 +1,18 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@env'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const UserApi = createApi({
     reducerPath: 'user',
     baseQuery: fetchBaseQuery({
         baseUrl: `${API_URL}`,
-        prepareHeaders: async (headers) => {
+        prepareHeaders: (headers) => {
             headers.set('Content-Type', 'application/json')
-            let token = await AsyncStorage.getItem('token');
+            let token = AsyncStorage.getItem('token');
             if (token) {
-                headers.set('token', token)
+                headers.set('Authorization', `Bearer ${token}`)
             }
+            return headers
         }
     }),
     endpoints(builder) {
@@ -25,23 +27,17 @@ const UserApi = createApi({
                 }
             }),
             me: builder.query({
-                query: (token) => {
+                query: () => {
                     return {
                         url: '/api/me',
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        },
                         method: 'GET'
                     }
                 }
             }),
             refreshtoken: builder.query({
-                query: (token) => {
+                query: () => {
                     return {
                         url: '/api/refresh_token',
-                        headers: {
-                            Authorization: `Bearer ${token}`
-                        },
                         method: 'GET'
                     }
                 }

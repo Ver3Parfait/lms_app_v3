@@ -112,9 +112,11 @@ const getStyles = (themes) => {
   return StyleSheet.create({
     container: {
       flex: 1,
+      flexDirection:'row',
+
     },
     drawerContent: {
-      flex: 1,
+      flex: 1,      
     },
     userInfoSection: {
       paddingLeft: 20,
