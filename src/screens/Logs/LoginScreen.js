@@ -3,7 +3,7 @@ import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
 import { ActivityIndicator, TextInput, Text, useTheme, Surface} from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+import HeaderPageComponent from "../../components/HeaderPage.component";
 
 const LoginScreen = ({ navigation }) => {
   const themes = useTheme();
@@ -33,7 +33,9 @@ const LoginScreen = ({ navigation }) => {
   }
 
   return (
+
       <Surface elevation={1} mode="flat"  style={styles.container}>
+        <HeaderPageComponent Invisble/>
         {
           loading ? (
             <>
@@ -86,7 +88,6 @@ const LoginScreen = ({ navigation }) => {
             </>
           )}
       </Surface>
-    </SafeAreaView>
   );
 };
 
