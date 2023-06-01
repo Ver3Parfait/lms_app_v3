@@ -1,7 +1,7 @@
 import { Text, IconButton, TouchableRipple, Surface, useTheme,} from "react-native-paper";
 import { FlatList, StyleSheet, Image } from "react-native";
 
-const CourseList = ({ data, navigation }) => {
+export default CourseList = ({ data, navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -49,7 +49,6 @@ const CourseList = ({ data, navigation }) => {
   );
 };
 
-export { CourseList };
 
 const getStyles = (theme) => {
   return StyleSheet.create({

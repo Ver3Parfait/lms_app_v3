@@ -1,13 +1,23 @@
 import { useState } from "react";
 import { StyleSheet } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { Text, TextInput, Avatar, Button, Surface, TouchableRipple, useTheme } from "react-native-paper";
+import {
+  Text,
+  TextInput,
+  Avatar,
+  Button,
+  Surface,
+  TouchableRipple,
+  useTheme,
+} from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import CertificationCard from "../components/CertificationCard";
+import CertificationCardComponent from "../components/CertificationCard.component";
+import HeaderPageComponent from "../components/HeaderPage.component";
 
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function HomeScreen({ navigation }) {
   const theme = useTheme();
-  const styles = getStyles(theme);
+  const insets = useSafeAreaInsets();
+  const styles = getStyles(theme, insets);
   const [switchValue, setSwitchValue] = useState(1);
   const courses = [];
 
@@ -37,7 +47,8 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <Surface style={styles.container}>
+      <HeaderPageComponent />
       <Surface style={styles.scrollSurface}>
         <Surface style={styles.header}>
           <Text style={styles.greeting}>
@@ -97,21 +108,24 @@ export default function HomeScreen({ navigation }) {
           </TouchableRipple>
         </Surface>
 
-        <CertificationCard data={switchValue === 1 ? courses : latestCourses} />
+        <CertificationCardComponent
+          data={switchValue === 1 ? courses : latestCourses}
+        />
       </Surface>
-    </SafeAreaView>
+    </Surface>
   );
 }
 HomeScreen.navigationOptions = {
   title: "Accueil", // Titre de l'écran
 };
-const getStyles = (theme) => {
+const getStyles = (theme, insets) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
+      height: "100%",
+      paddingTop: insets.top
     },
     scrollSurface: {
-      flex: 1,
+      height: "100%",
       padding: 20,
     },
     header: {
@@ -183,4 +197,4 @@ const getStyles = (theme) => {
       color: "#555",
     },
   });
-}
+};

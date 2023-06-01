@@ -2,7 +2,7 @@ import { List, Text, TouchableRipple, Surface } from "react-native-paper";
 import { FlatList, StyleSheet } from "react-native";
 import { useTheme } from "react-native-paper";
 
-const ListAccordion = ({ data }) => {
+export default ListAccordion = ({ data }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const renderItem = ({ item }) => (
@@ -45,7 +45,6 @@ const ListAccordion = ({ data }) => {
   );
 };
 
-export default ListAccordion;
 const getStyles = (theme) => {
   return StyleSheet.create({
     listContent: {
