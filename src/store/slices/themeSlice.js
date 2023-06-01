@@ -4,12 +4,12 @@ import { createSlice } from "@reduxjs/toolkit";
 const themeSlice = createSlice({
   name: "theme",
   initialState: {
-    theme:"dark",
+    theme: AsyncStorage.getItem('theme') || "light"
   },
   reducers: {
-    toggleTheme: async (state,action) => {       
+    toggleTheme: (state, action) => {
       state.theme = state.theme === "light" ? 'dark' : "light"
-      await AsyncStorage.setItem('theme',state.theme)
+      AsyncStorage.setItem('theme', state.theme)
     },
   },
 });
