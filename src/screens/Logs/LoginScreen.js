@@ -30,7 +30,7 @@ const LoginScreen = ({ navigation }) => {
   }
 
   return (
-      <Surface style={styles.container}>
+      <Surface elevation={1} mode="flat"  style={styles.container}>
         {
           loading ? (
             <>

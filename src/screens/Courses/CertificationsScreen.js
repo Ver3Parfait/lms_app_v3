@@ -1,10 +1,9 @@
 import { StyleSheet} from "react-native";
 import { Surface, useTheme } from "react-native-paper";
 import CertificationCardComponent from "../../components/CertificationCard.component";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+import HeaderPageComponent from "../../components/HeaderPage.component";
 
 const CertificationsScreen = ({ navigation }) => {
-  const insets = useSafeAreaInsets()
   const theme = useTheme();
   const styles = getStyles(theme);
   const data = [];
@@ -21,7 +20,8 @@ const CertificationsScreen = ({ navigation }) => {
   }
 
   return (
-    <Surface style={[styles.container, {paddingTop:insets.top}]}>
+    <Surface elevation={1} mode="flat"  style={styles.container}>
+      <HeaderPageComponent/>
       <CertificationCardComponent navigation={navigation} data={data}/>
     </Surface>
 
@@ -30,7 +30,7 @@ const CertificationsScreen = ({ navigation }) => {
 const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
+      height:"100%",
       flexDirection: "column",
     },
   });

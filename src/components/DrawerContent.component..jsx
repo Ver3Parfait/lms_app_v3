@@ -25,28 +25,28 @@ export default  DrawerContent= (props) => {
   };
 
   return (
-      <Surface style={[styles.container, { paddingTop: insets.top }]}>
+      <Surface elevation={0} mode="flat"  style={[styles.container, { paddingTop: insets.top }]}>
         <Drawer.Section style={styles.drawerContent}>
-          <Surface style={styles.userInfoSection}>
-            <Surface style={{ flexDirection: "row", marginTop: 15 }}>
+          <Surface elevation={0} mode="flat"  style={styles.userInfoSection}>
+            <Surface elevation={0} mode="flat"  style={{ flexDirection: "row", marginTop: 15 }}>
               <Avatar.Image
                 source={{
                   uri: "https://i.pinimg.com/236x/6f/24/37/6f24371638c703bd61d3c67dc51762e1.jpg",
                 }}
                 size={50}
               />
-              <Surface style={{ marginLeft: 15, flexDirection: "column" }}>
+              <Surface elevation={0} mode="flat"  style={{ marginLeft: 15, flexDirection: "column" }}>
                 <Title style={styles.title}>Militello Lucas</Title>
                 <Caption style={styles.caption}>Apprenti</Caption>
               </Surface>
             </Surface>
 
-            <Surface style={styles.row}>
-              <Surface style={styles.section}>
+            <Surface elevation={0} mode="flat"  style={styles.row}>
+              <Surface elevation={0} mode="flat"  style={styles.section}>
                 <Text style={[styles.paragraph, styles.caption]}>90</Text>
                 <Caption style={styles.caption}>En cours</Caption>
               </Surface>
-              <Surface style={styles.section}>
+              <Surface elevation={0} mode="flat"  style={styles.section}>
                 <Text style={[styles.paragraph, styles.caption]}>150</Text>
                 <Caption style={styles.caption}>Terminer</Caption>
               </Surface>

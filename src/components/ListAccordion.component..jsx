@@ -16,18 +16,18 @@ export default ListAccordion = ({ data }) => {
           key={`${course.id}-${course.title}`}
           style={styles.container}
         >
-          <Surface style={styles.surface}>
-            <Surface style={styles.image}>
+          <Surface elevation={0} mode="flat"  style={styles.surface}>
+            <Surface elevation={0} mode="flat"  style={styles.image}>
               <Text style={styles.index}>#</Text>
             </Surface>
-            <Surface style={styles.infos}>
-              <Surface style={styles.infosRow}>
-                <Surface style={styles.titleContainer}>
+            <Surface elevation={0} mode="flat"  style={styles.infos}>
+              <Surface elevation={0} mode="flat"  style={styles.infosRow}>
+                <Surface elevation={0} mode="flat"  style={styles.titleContainer}>
                   <Text style={styles.title}>{course.title}</Text>
                 </Surface>
-                <Surface style={styles.iconContainer}></Surface>
+                <Surface elevation={0} mode="flat"  style={styles.iconContainer}></Surface>
               </Surface>
-              <Surface>{/* Futur ajout d'une barre de progression */}</Surface>
+              <Surface elevation={0} mode="flat" >{/* Futur ajout d'une barre de progression */}</Surface>
             </Surface>
           </Surface>
         </TouchableRipple>

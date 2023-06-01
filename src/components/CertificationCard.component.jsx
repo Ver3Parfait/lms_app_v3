@@ -16,7 +16,7 @@ export default CertificationCard = ({ data, navigation }) => {
       <Card.Cover source={{ uri: item.imageUrl }} style={styles.CourseImage} />
       <Card.Content>
         <Text style={styles.CourseTitle}>{item.name}</Text>
-        <Surface style={styles.descriptionContainer}>
+        <Surface elevation={0} mode="flat"  style={styles.descriptionContainer}>
           <Text style={styles.CourseDescription}>{item.description}</Text>
           {item.duration && <Text style={styles.CourseDescription}>{item.duration}</Text>}
         </Surface>
