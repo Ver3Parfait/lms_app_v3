@@ -48,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
                 source={require('../../../assets/logoRI7.png')}
               />
               <Text
-                variant="displayMedium"
+                variant="headlineLarge"
                 style={styles.text}
               >
                 connexion

@@ -6,10 +6,12 @@ import { NavigationContainer } from "@react-navigation/native";
 import { useColorScheme } from "react-native";
 import { default as colorsLight } from "../colors_light.json";
 import { default as colorsDark } from "../colors_dark.json";
-import BottomTabNavigator from "./navigators/BottomTabNavigator";
 import { useSelector } from "react-redux";
-// import MainNavigator from "./navigators/MainNavigator";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import LoginScreen from "./screens/Logs/LoginScreen";
+// import BottomTabNavigator from "./navigators/BottomTabNavigator";
+// import MainNavigator from "./navigators/MainNavigator";
+
 const Main = () => {
     const colorScheme = useColorScheme();
     const {theme} = useSelector((state) => state.theme)
@@ -22,7 +24,7 @@ const Main = () => {
         <PaperProvider theme={paperTheme}>
             <SafeAreaProvider>
             <NavigationContainer>
-                <BottomTabNavigator />
+                <LoginScreen/>
                 {/* <MainNavigator /> */}
             </NavigationContainer>
             </SafeAreaProvider>
