@@ -9,23 +9,23 @@ import {
   Surface,
   useTheme,
 } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../store/slices/themeSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function DrawerContent(props) {
+export default  DrawerContent= (props) => {
   const themes = useTheme();
   const styles = getStyles(themes);
   const dispatch = useDispatch();
-
+  const insets = useSafeAreaInsets();
   const { theme } = useSelector((state) => state.theme);
   const changeTheme = () => {
     dispatch(toggleTheme());
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Surface style={styles.container}>
+      <Surface style={[styles.container, { paddingTop: insets.top }]}>
         <Drawer.Section style={styles.drawerContent}>
           <Surface style={styles.userInfoSection}>
             <Surface style={{ flexDirection: "row", marginTop: 15 }}>
@@ -84,7 +84,7 @@ export default function DrawerContent(props) {
             />
           </Drawer.Section>
 
-          <Drawer.Section title="Préférences">
+          <Drawer.Section  showDivider={false} title="Préférences">
             <Drawer.Item
               label="Thème Sombre"
               right={() => (
@@ -94,7 +94,7 @@ export default function DrawerContent(props) {
           </Drawer.Section>
         </Drawer.Section>
 
-        <Drawer.Section style={styles.bottomDrawerSection}>
+        <Drawer.Section  showDivider={false}>
           <Drawer.Item
             icon="arrow-left"
             label="Déconnexion"
@@ -105,16 +105,16 @@ export default function DrawerContent(props) {
           />
         </Drawer.Section>
       </Surface>
-    </SafeAreaView>
   );
 }
 const getStyles = (themes) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
+      height:'100%',
+      justifyContent:'space-between',
+      backgroundColor: themes.colors.background
     },
     drawerContent: {
-      flex: 1,
     },
     userInfoSection: {
       paddingLeft: 20,
@@ -144,11 +144,7 @@ const getStyles = (themes) => {
     },
     drawerSection: {
       marginTop: 15,
-    },
-    bottomDrawerSection: {
-      marginBottom: 15,
-      borderTopColor: "#f4f4f4",
-      borderTopWidth: 1,
+borderBottomWidth:0
     },
   });
 };

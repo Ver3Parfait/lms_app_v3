@@ -32,69 +32,12 @@ export default CertificationCard = ({ data, navigation }) => {
     />
   );
 };
+
 const getStyles = (theme) => {
   return StyleSheet.create({
     descriptionContainer: {
-      flexDirection:'row',
+      flexDirection: "row",
       justifyContent: "space-around",
-    },
-    container: {
-      flex: 1,
-    },
-    scrollView: {
-      flex: 1,
-      padding: 20,
-    },
-    header: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 20,
-    },
-    greeting: {
-      fontSize: 24,
-      fontWeight: "bold",
-      color: "#000",
-    },
-    username: {
-      marginLeft: 10,
-    },
-    avatar: {
-      marginRight: 10,
-    },
-    searchContainer: {
-      flexDirection: "row",
-      marginBottom: 20,
-      alignItems: "center",
-    },
-    searchInput: {
-      flex: 1,
-      marginRight: 10,
-    },
-    switchContainer: {
-      marginBottom: 20,
-    },
-    switchButtonGroup: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
-    switchButton: {
-      flex: 1,
-      alignSelf: "center",
-      marginRight: 10,
-    },
-    sectionContainer: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-      marginBottom: 20,
-    },
-    sectionTitle: {
-      fontSize: 18,
-      fontWeight: "bold",
-    },
-    sectionLink: {
-      color: "#0d47a1",
     },
     CourseCard: {
       marginBottom: 10,
@@ -117,4 +60,4 @@ const getStyles = (theme) => {
       color: "#555",
     },
   });
-}
+};

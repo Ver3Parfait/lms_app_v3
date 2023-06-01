@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import {  StyleSheet, ScrollView } from "react-native";
 import { Avatar, Title, Caption, List, Surface } from "react-native-paper";
 import { useTheme } from "react-native-paper";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 export default function ProfileScreen({navigation}) {
   const theme = useTheme();
   const styles = getStyles(theme);
+  const insets = useSafeAreaInsets()
   const [expanded, setExpanded] = useState(false);
 
   const handleAccordionToggle = () => {
@@ -13,7 +15,7 @@ export default function ProfileScreen({navigation}) {
   };
 
   return (
-    <Surface style={styles.container}>
+    <Surface style={[styles.container,{paddingTop: insets.top}]}>
       <Surface style={styles.userInfoSection}>
         <Surface style={styles.userInfo}>
           <Avatar.Image
