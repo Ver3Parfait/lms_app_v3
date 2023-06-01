@@ -2,16 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 import { API_URL } from '@env'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-
-
 const CertificationApi = createApi({
     reducerPath: 'certifications',
     baseQuery: fetchBaseQuery({
         baseUrl: `${API_URL}`,
-        prepareHeaders: async (headers) => {
-            let token = await AsyncStorage.getItem('token');
+        prepareHeaders: (headers) => {
+            let token = AsyncStorage.getItem('token');
             headers.set('Content-Type', 'application/json')
-            headers.set('token', token)
+            headers.set('Authorization', `Bearer ${token}`)
             return headers
         }
     }),
