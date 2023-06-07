@@ -1,8 +1,11 @@
 import { StyleSheet, FlatList } from "react-native";
+import { memo } from "react";
 import { Card, Surface, Text } from "react-native-paper";
 import { useTheme } from "react-native-paper";
+import { useNavigation } from '@react-navigation/native';
 
-export default CertificationCard = ({ data, navigation }) => {
+const CertificationCard = ({ data }) => {
+  const navigation = useNavigation();
   const theme = useTheme();
   const styles = getStyles(theme);
   const renderItem = ({ item }) => (
@@ -10,10 +13,11 @@ export default CertificationCard = ({ data, navigation }) => {
       key={item.id}
       style={styles.CourseCard}
       onPress={() =>
-        navigation.navigate("CertificationCoursesScreen", { CertificationCoursesId: item.id })
+        navigation.navigate("Cours", { CertificationCoursesId: item.id })
       }
+      elevation={1}
     >
-      <Card.Cover source={{ uri: item.imageUrl }} style={styles.CourseImage} />
+      <Card.Cover  source={{ uri: item.imageUrl }} style={styles.CourseImage} />
       <Card.Content>
         <Text style={styles.CourseTitle}>{item.name}</Text>
         <Surface elevation={0} mode="flat"  style={styles.descriptionContainer}>
@@ -33,6 +37,7 @@ export default CertificationCard = ({ data, navigation }) => {
   );
 };
 
+export default memo(CertificationCard)
 const getStyles = (theme) => {
   return StyleSheet.create({
     descriptionContainer: {
@@ -42,6 +47,8 @@ const getStyles = (theme) => {
     CourseCard: {
       marginBottom: 10,
       borderRadius: 10,
+      padding:10,
+      backgroundColor:theme.colors.background
     },
     CourseImage: {
       height: 200,
@@ -49,6 +56,7 @@ const getStyles = (theme) => {
       borderTopRightRadius: 10,
     },
     CourseTitle: {
+      color:theme.colors.primary,
       marginTop: 20,
       textAlign: "center",
       fontWeight: "bold",
@@ -57,7 +65,6 @@ const getStyles = (theme) => {
     },
     CourseDescription: {
       textAlign: "center",
-      color: "#555",
     },
   });
 };

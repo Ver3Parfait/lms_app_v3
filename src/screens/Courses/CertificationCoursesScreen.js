@@ -8,9 +8,11 @@ export default CertificationCoursesScreen = ({ navigation }) => {
   const styles = getStyles(theme);
   const data = [];
 
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 100; i++) {
+    const progress =parseFloat((Math.random() * 1).toFixed(1)) ;
     data.push({
       id: i + 1,
+      progress: progress,
       name: "Mises à jour & Nouveaux Contenus en compagnie de Fabien Walle et Militello Lucas",
       description: "Militello Lucas",
       duration:'20 minutes',
@@ -31,7 +33,7 @@ export default CertificationCoursesScreen = ({ navigation }) => {
 const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
-      flex: 1,
+      height:"100%",
       flexDirection: "column",
     },
   });

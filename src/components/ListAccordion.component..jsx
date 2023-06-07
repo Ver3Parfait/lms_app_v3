@@ -1,36 +1,33 @@
-import { List, Text, TouchableRipple, Surface } from "react-native-paper";
+import { List, Text, Surface, useTheme, IconButton } from "react-native-paper";
 import { FlatList, StyleSheet } from "react-native";
-import { useTheme } from "react-native-paper";
+import { memo } from "react";
 
-export default ListAccordion = ({ data }) => {
+
+const ListAccordion = ({ data }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+
   const renderItem = ({ item }) => (
     <List.Accordion
       id={item.title}
       title={item.title}
-      left={(props) => <List.Icon {...props} icon={item.icon} />}
+      titleNumberOfLines={0}
+      titleStyle={styles.title}
+      left={() => (
+        <Surface elevation={0} mode="flat" style={styles.indexContainer}>
+          <Text style={styles.index}>{item.index}</Text>
+        </Surface>
+      )}
     >
       {item.courses.map((course) => (
-        <TouchableRipple
-          key={`${course.id}-${course.title}`}
-          style={styles.container}
-        >
-          <Surface elevation={0} mode="flat"  style={styles.surface}>
-            <Surface elevation={0} mode="flat"  style={styles.image}>
-              <Text style={styles.index}>#</Text>
-            </Surface>
-            <Surface elevation={0} mode="flat"  style={styles.infos}>
-              <Surface elevation={0} mode="flat"  style={styles.infosRow}>
-                <Surface elevation={0} mode="flat"  style={styles.titleContainer}>
-                  <Text style={styles.title}>{course.title}</Text>
-                </Surface>
-                <Surface elevation={0} mode="flat"  style={styles.iconContainer}></Surface>
-              </Surface>
-              <Surface elevation={0} mode="flat" >{/* Futur ajout d'une barre de progression */}</Surface>
-            </Surface>
+        <Surface elevation={0} mode="flat" key={`${course.id}-${course.title}`} style={styles.surface}>
+          <Surface elevation={0} mode="flat" style={styles.image}>
+            <Text style={styles.index}>{course.index}</Text>
           </Surface>
-        </TouchableRipple>
+          <Surface elevation={0} mode="flat" style={styles.infos}>
+            <Text style={styles.title}>{course.title}</Text>
+          </Surface>
+        </Surface>
       ))}
     </List.Accordion>
   );
@@ -45,58 +42,40 @@ export default ListAccordion = ({ data }) => {
   );
 };
 
+export default memo(ListAccordion)
 const getStyles = (theme) => {
   return StyleSheet.create({
     listContent: {
       paddingVertical: 10,
     },
-    container: {
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingLeft: 10,
-      flexDirection: "row",
-      height: 80,
-    },
     title: {
       fontWeight: "bold",
       fontSize: 13.5,
+      textAlign: "center",
+      
     },
-    titleContainer: {
-      flex: 1,
-      flexWrap: "wrap",
-    },
-    surface: {
-      flex: 1,
-      elevation: 4,
-      borderRadius: 4,
-      flexDirection: "row",
-    },
-    image: {
-      width: 60,
-      height: 60,
+    indexContainer: {
+      width: 40,
+      height:40,
       alignItems: "center",
       justifyContent: "center",
-      margin: 10,
-      borderRadius: 0,
+      margin:10
     },
     index: {
       fontSize: 16,
       fontWeight: "bold",
+      color:theme.colors.primary
+    },
+    surface: {
+      flexDirection: "row",
+      alignItems: "center",
+    },
+    image: {
+      paddingTop:10,
+      paddingBottom:10,
     },
     infos: {
       flex: 1,
-      paddingRight: 10,
-    },
-    infosRow: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
-    iconContainer: {
-      width: 20,
-      height: 20,
-      alignItems: "center",
-      justifyContent: "center",
     },
   });
-}
+};

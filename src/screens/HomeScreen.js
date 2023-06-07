@@ -13,11 +13,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CertificationCardComponent from "../components/CertificationCard.component";
 import HeaderPageComponent from "../components/HeaderPage.component";
 
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function HomeScreen({ navigation }) {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const insets = useSafeAreaInsets();
   const [switchValue, setSwitchValue] = useState(1);
   const courses = [];
 
@@ -97,12 +95,12 @@ export default function HomeScreen({ navigation }) {
 
         <Surface elevation={0} mode="flat"  style={styles.sectionContainer}>
           {switchValue === 1 ? (
-            <Text style={styles.sectionTitle}>Les plus consultée</Text>
+            <Text style={styles.sectionTitle}>Mes Favoris</Text>
           ) : (
-            <Text style={styles.sectionTitle}>Les derniers cours</Text>
+            <Text style={styles.sectionTitle}>Continuer</Text>
           )}
           <TouchableRipple
-            onPress={() => navigation.navigate("CourseNavigator")}
+            onPress={() => navigation.navigate("Formations")}
           >
             <Text style={styles.sectionLink}>Tout voir</Text>
           </TouchableRipple>
@@ -115,9 +113,7 @@ export default function HomeScreen({ navigation }) {
     </Surface>
   );
 }
-HomeScreen.navigationOptions = {
-  title: "Accueil", // Titre de l'écran
-};
+
 const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
@@ -134,11 +130,12 @@ const getStyles = (theme) => {
       marginBottom: 20,
     },
     greeting: {
-      fontSize: 24,
+      fontSize: 25,
       fontWeight: "bold",
-      color: "#000",
+      color:theme.colors.primary,
     },
     username: {
+      fontSize: 20,
       marginLeft: 10,
     },
     avatar: {
@@ -176,7 +173,7 @@ const getStyles = (theme) => {
       fontWeight: "bold",
     },
     sectionLink: {
-      color: "#0d47a1",
+      color: theme.colors.secondary,
     },
     CourseCard: {
       marginBottom: 10,
@@ -192,8 +189,6 @@ const getStyles = (theme) => {
       marginBottom: 8,
       fontSize: 16,
     },
-    CourseDescription: {
-      color: "#555",
-    },
+
   });
 };

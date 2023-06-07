@@ -1,22 +1,34 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createSlice } from "@reduxjs/toolkit";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const themeSlice = createSlice({
   name: "theme",
   initialState: {
-    theme: AsyncStorage.getItem('theme') || "light"
+    theme: "light"
   },
   reducers: {
-<<<<<<< HEAD
-    toggleTheme: (state,action) => {       
-=======
-    toggleTheme: (state, action) => {
->>>>>>> f23e3032220d9dd7afdb481577149a442e0c3d69
-      state.theme = state.theme === "light" ? 'dark' : "light"
-      AsyncStorage.setItem('theme', state.theme)
+    setInitialTheme: (state, action) => {
+      state.theme = action.payload;
+    },
+    toggleTheme: (state) => {
+      state.theme = state.theme === "light" ? "dark" : "light";
     },
   },
 });
 
-export const { toggleTheme } = themeSlice.actions;
-export const themeReducer = themeSlice.reducer
+export const { setInitialTheme, toggleTheme } = themeSlice.actions;
+
+export const fetchInitialTheme = () => {
+  return async (dispatch) => {
+    try {
+      const theme = await AsyncStorage.getItem('theme');
+      if (theme !== null) {
+        dispatch(setInitialTheme(theme));
+      }
+    } catch (error) {
+      console.log("Erreur lors du chargement du thème :", error);
+    }
+  };
+};
+
+export const themeReducer = themeSlice.reducer;

@@ -1,4 +1,4 @@
-import { StyleSheet} from "react-native";
+import { StyleSheet } from "react-native";
 import { Surface, useTheme } from "react-native-paper";
 import CertificationCardComponent from "../../components/CertificationCard.component";
 import HeaderPageComponent from "../../components/HeaderPage.component";
@@ -8,32 +8,37 @@ const CertificationsScreen = ({ navigation }) => {
   const styles = getStyles(theme);
   const data = [];
 
-  for (let i = 0; i < 60; i++) {
+  for (let i = 0; i < 9; i++) {
     data.push({
       id: i + 1,
       name: "Mises à jour & Nouveaux Contenus en compagnie de Fabien Walle et Militello Lucas",
       description: "Militello Lucas",
-      duration:'20 minutes',
+      duration: "20 minutes",
       imageUrl:
         "https://mimir.ri7.fr/uploads/certification/banniere-1200x628-6331a44540fa9.jpg",
     });
   }
 
   return (
-    <Surface elevation={1} mode="flat"  style={styles.container}>
-      <HeaderPageComponent/>
-      <CertificationCardComponent navigation={navigation} data={data}/>
+    <Surface elevation={1} mode="flat" style={styles.container}>
+      <HeaderPageComponent Invisble />
+      <Surface style={styles.view}>
+        <CertificationCardComponent data={data} />
+      </Surface>
     </Surface>
-
   );
 };
 const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
-      height:"100%",
+      height: "100%",
       flexDirection: "column",
     },
+    view:{
+      flex:1,
+      padding:20
+    }
   });
-}
+};
 
 export default CertificationsScreen;
