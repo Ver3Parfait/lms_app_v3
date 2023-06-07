@@ -13,7 +13,8 @@ const CertificationsScreen = ({ navigation }) => {
       id: i + 1,
       name: "Mises à jour & Nouveaux Contenus en compagnie de Fabien Walle et Militello Lucas",
       description: "Militello Lucas",
-      duration: "20 minutes",
+      duration: "863",
+      coursesNumbers: 18,
       imageUrl:
         "https://mimir.ri7.fr/uploads/certification/banniere-1200x628-6331a44540fa9.jpg",
     });

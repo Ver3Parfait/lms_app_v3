@@ -8,17 +8,35 @@ export default CertificationCoursesScreen = ({ navigation }) => {
   const styles = getStyles(theme);
   const data = [];
 
-  for (let i = 0; i < 100; i++) {
-    const progress =parseFloat((Math.random() * 1).toFixed(1)) ;
+  for (let i = 0; i < 30; i++) {
+    let coursesType = ""
+    let imageUrl = ""
+    let randomNumber = Math.floor(Math.random() * 5) + 1
+    if (randomNumber === 1) {
+      coursesType = "HTML"
+      imageUrl = "https://cdn-icons-png.flaticon.com/512/732/732212.png"
+    }else if (randomNumber === 2){
+      coursesType = "CSS"
+      imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/2048px-CSS3_logo.svg.png"
+    }else if (randomNumber === 3){
+      coursesType = "JavaScript"
+      imageUrl = "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
+    }else if (randomNumber === 4){
+      coursesType = "PHP"
+      imageUrl = "https://courenligne.com/uploads/cours/62f0e7309be16/995e849805a9dc70074081bad5f1542f.png"
+    }else{
+      coursesType = "React"
+      imageUrl = "https://ionicframework.com/docs/icons/logo-react-icon.png"
+    }
+    const progress = parseFloat((Math.random() * 1).toFixed(1)) ;
     data.push({
       id: i + 1,
       progress: progress,
-      name: "Mises à jour & Nouveaux Contenus en compagnie de Fabien Walle et Militello Lucas",
+      name: coursesType,
       description: "Militello Lucas",
       duration:'20 minutes',
-      // imageUrl:
-      //   "https://mimir.ri7.fr/uploads/certification/banniere-1200x628-6331a44540fa9.jpg",
-      index: i + 1,
+      imageUrl
+      // index: i + 1,
     });
   }
 

@@ -22,7 +22,8 @@ const CertificationCard = ({ data }) => {
         <Text style={styles.CourseTitle}>{item.name}</Text>
         <Surface elevation={0} mode="flat"  style={styles.descriptionContainer}>
           <Text style={styles.CourseDescription}>{item.description}</Text>
-          {item.duration && <Text style={styles.CourseDescription}>{item.duration}</Text>}
+          <Text style={styles.CourseDescription}>{item.duration} heures</Text>
+          <Text style={styles.CourseDescription}>{item.coursesNumbers} cours</Text>
         </Surface>
       </Card.Content>
     </Card>

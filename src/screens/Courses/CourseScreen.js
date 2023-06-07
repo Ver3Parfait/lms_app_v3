@@ -22,13 +22,21 @@ export default function CourseScreen() {
 
 
   for (let i = 0; i < 8; i++) {
-    const numCourses = Math.floor(Math.random() * 5) + 1; // Génère un nombre aléatoire entre 1 et 5 pour le nombre de cours
-
+    const numCourses = Math.floor(Math.random() * 5) + 1; 
     const courses = [];
     for (let j = 0; j < numCourses; j++) {
+      let courseType = ""
+      const typeCourses = Math.floor(Math.random() * 3) + 1;
+      if (typeCourses === 1) {
+        courseType = "Page"
+      }else if (typeCourses === 2){
+        courseType = "Article"
+      }else{
+        courseType = "Quizz"
+      }
       courses.push({
-        title: `Course ${j + 1}`,
-        index: j + 1,
+        title: `Css Les bases N° ${j + 1}`,
+        index: courseType,
       });
     }
 

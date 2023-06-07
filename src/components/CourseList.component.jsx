@@ -118,10 +118,6 @@ const getStyles = (theme) => {
       alignItems: "center",
       margin: 10,
       borderRadius: 0,
-      fontSize: 16,
-      fontWeight: "bold",
-      color: theme.colors.primary,
-      textAlign: "center",
       padding: 10,
     },
     Infos: {

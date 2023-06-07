@@ -14,10 +14,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { toggleTheme } from "../store/slices/themeSlice";
 import { setInitialTheme } from "../store/slices/themeSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 
 export default DrawerContent = (props) => {
+  const insets = useSafeAreaInsets()
   const themes = useTheme();
-  const styles = getStyles(themes);
+  const styles = getStyles(themes, insets);
   const dispatch = useDispatch();
   const { theme } = useSelector((state) => state.theme);
   const changeTheme = () => {
@@ -52,6 +55,7 @@ export default DrawerContent = (props) => {
     dispatch(toggleTheme());
     saveTheme(newTheme);
   };
+
 
   return (
     <Surface
@@ -149,10 +153,11 @@ export default DrawerContent = (props) => {
   );
 };
 
-const getStyles = (themes) => {
+const getStyles = (themes, insets) => {
   return StyleSheet.create({
     container: {
       height: "100%",
+      paddingTop:insets.top ,
       justifyContent: "space-between",
       backgroundColor: themes.colors.background,
     },

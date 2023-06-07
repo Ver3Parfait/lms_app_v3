@@ -1,7 +1,13 @@
-import { List, Text, Surface, useTheme, IconButton } from "react-native-paper";
+import {
+  List,
+  Text,
+  Surface,
+  useTheme,
+  IconButton,
+  TouchableRipple,
+} from "react-native-paper";
 import { FlatList, StyleSheet } from "react-native";
 import { memo } from "react";
-
 
 const ListAccordion = ({ data }) => {
   const theme = useTheme();
@@ -20,14 +26,27 @@ const ListAccordion = ({ data }) => {
       )}
     >
       {item.courses.map((course) => (
-        <Surface elevation={0} mode="flat" key={`${course.id}-${course.title}`} style={styles.surface}>
-          <Surface elevation={0} mode="flat" style={styles.image}>
-            <Text style={styles.index}>{course.index}</Text>
+        <TouchableRipple
+          onPress={() => console.log("poire")}
+          key={`${course.id}-${course.title}`}
+          style={styles.surface}
+        >
+          <Surface style={styles.row}>
+            <Surface elevation={0} mode="flat" style={styles.image}>
+              <Text style={styles.index}>{course.index}</Text>
+            </Surface>
+            <Surface elevation={0} mode="flat" style={styles.infos}>
+              <Text style={styles.title}>{course.title}</Text>
+            </Surface>
+            <IconButton
+              style={styles.iconButton}
+              icon={"heart-outline"}
+              color={theme.colors.primary}
+              size={25}
+              onPress={() => navigation.goBack()}
+            />
           </Surface>
-          <Surface elevation={0} mode="flat" style={styles.infos}>
-            <Text style={styles.title}>{course.title}</Text>
-          </Surface>
-        </Surface>
+        </TouchableRipple>
       ))}
     </List.Accordion>
   );
@@ -42,9 +61,15 @@ const ListAccordion = ({ data }) => {
   );
 };
 
-export default memo(ListAccordion)
+export default memo(ListAccordion);
+
 const getStyles = (theme) => {
   return StyleSheet.create({
+    row: {
+      alignItems: "center",
+      flexDirection: "row",
+      width: "100%",
+    },
     listContent: {
       paddingVertical: 10,
     },
@@ -52,30 +77,36 @@ const getStyles = (theme) => {
       fontWeight: "bold",
       fontSize: 13.5,
       textAlign: "center",
-      
     },
     indexContainer: {
       width: 40,
-      height:40,
+      height: 40,
       alignItems: "center",
       justifyContent: "center",
-      margin:10
+      margin: 10,
     },
     index: {
       fontSize: 16,
       fontWeight: "bold",
-      color:theme.colors.primary
+      color: theme.colors.primary,
     },
     surface: {
       flexDirection: "row",
       alignItems: "center",
     },
     image: {
-      paddingTop:10,
-      paddingBottom:10,
+      flex: 1,
+      paddingTop: 10,
+      paddingBottom: 10,
+    },
+    iconButton: {
+      flex: 1,
     },
     infos: {
-      flex: 1,
+      flex: 2,
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
   });
 };
