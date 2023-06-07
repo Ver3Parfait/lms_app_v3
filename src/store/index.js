@@ -21,5 +21,5 @@ const store = configureStore({
 setupListeners(store.dispatch)
 
 export { store, toggleTheme, addFavorite, removeFavorite, resetFavorites }
-export { useLoginMutation, useMeQuery, useRefreshtokenQuery } from './apis/userApis'
+export { useLoginQuery, useMeQuery, useRefreshtokenQuery } from './apis/userApis'
 export { useCertificationsQuery, useCertificationCoursesQuery, useCourseQuery } from './apis/certificationsApis'

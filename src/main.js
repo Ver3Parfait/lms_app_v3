@@ -8,9 +8,9 @@ import { default as colorsLight } from "../colors_light.json";
 import { default as colorsDark } from "../colors_dark.json";
 import { useSelector } from "react-redux";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import LoginScreen from "./screens/Logs/LoginScreen";
+// import LoginScreen from "./screens/Logs/LoginScreen";
 // import BottomTabNavigator from "./navigators/BottomTabNavigator";
-// import MainNavigator from "./navigators/MainNavigator";
+import MainNavigator from "./navigators/MainNavigator";
 
 const Main = () => {
     const colorScheme = useColorScheme();
@@ -24,8 +24,8 @@ const Main = () => {
         <PaperProvider theme={paperTheme}>
             <SafeAreaProvider>
             <NavigationContainer>
-                <LoginScreen/>
-                {/* <MainNavigator /> */}
+                {/* <LoginScreen/> */}
+                <MainNavigator />
             </NavigationContainer>
             </SafeAreaProvider>
         </PaperProvider>

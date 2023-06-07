@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
-import { ActivityIndicator, TextInput, Text, useTheme, Surface} from "react-native-paper";
+import { ActivityIndicator, TextInput, Text, useTheme, Surface } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const LoginScreen = ({ navigation }) => {
@@ -96,7 +96,7 @@ export default LoginScreen;
 const getStyles = (themes) => {
   return StyleSheet.create({
     view: {
-      backgroundColor:themes.colors.surface,
+      backgroundColor: themes.colors.surface,
     },
     container: {
       justifyContent: "center",
@@ -108,8 +108,8 @@ const getStyles = (themes) => {
       textTransform: "uppercase",
       marginVertical: 10,
       fontWeight: "500",
-      color:themes.colors.primary,
-      fontFamily:'Helvetica-Bold'
+      color: themes.colors.primary,
+      fontFamily: 'Helvetica-Bold'
     },
     input: {
       marginTop: 20,

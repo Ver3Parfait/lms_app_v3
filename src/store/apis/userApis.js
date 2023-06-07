@@ -7,22 +7,21 @@ const UserApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: `${API_URL}`,
         prepareHeaders: (headers) => {
-            headers.set('Content-Type', 'application/json')
-            let token = AsyncStorage.getItem('token');
-            if (token) {
-                headers.set('Authorization', `Bearer ${token}`)
-            }
+            headers.set('Accept', 'application/json')
+            AsyncStorage.getItem('token').then((res) => {
+                res && headers.set('Authorization', `Bearer ${res}`)
+            })
             return headers
         }
     }),
     endpoints(builder) {
         return {
-            login: builder.mutation({
+            login: builder.query({
                 query: (body) => {
                     return {
                         url: '/authentication_token',
                         method: 'POST',
-                        body: body
+                        body: body,
                     }
                 }
             }),
@@ -30,7 +29,7 @@ const UserApi = createApi({
                 query: () => {
                     return {
                         url: '/api/me',
-                        method: 'GET'
+                        method: 'GET',
                     }
                 }
             }),
@@ -38,7 +37,7 @@ const UserApi = createApi({
                 query: () => {
                     return {
                         url: '/api/refresh_token',
-                        method: 'GET'
+                        method: 'GET',
                     }
                 }
             })
@@ -46,5 +45,5 @@ const UserApi = createApi({
     }
 })
 
-export const { useLoginMutation, useMeQuery, useRefreshtokenQuery } = UserApi
+export const { useLoginQuery, useMeQuery, useRefreshtokenQuery } = UserApi
 export { UserApi }
