@@ -1,39 +1,74 @@
-import { Text, IconButton, TouchableRipple, Surface, useTheme,} from "react-native-paper";
+import React from "react";
+import {
+  Text,
+  IconButton,
+  TouchableRipple,
+  Surface,
+  useTheme,
+  ProgressBar,
+} from "react-native-paper";
 import { FlatList, StyleSheet, Image } from "react-native";
+import { memo } from "react";
 
-export default CourseList = ({ data, navigation }) => {
+const CourseList = ({ data, navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+
 
   const renderItem = ({ item }) => (
     <TouchableRipple
       key={item.id.toString()}
-      onPress={() => navigation.navigate("CourseScreen", { CourseId: item.id })}
+      onPress={() => navigation.navigate("Vidéo", { CourseId: item.id })}
     >
-      <Surface style={styles.container} >
+      <Surface elevation={0} mode="flat" style={styles.container}>
         {item.imageUrl ? (
-          <Image style={styles.Image} source={{ uri: item.imageUrl }} />
+          <Surface elevation={0} mode="flat" style={styles.ImageContainer}>
+            <Image style={styles.Image} source={{ uri: item.imageUrl }} />
+          </Surface>
         ) : (
-          <Surface style={styles.Image}>
-            <Text style={styles.Index}>{item.index}</Text>
+          <Surface elevation={0} mode="flat" style={styles.ImageContainer}>
+            <Text style={styles.Image}>{item.index}</Text>
           </Surface>
         )}
-        <Surface style={styles.Infos}>
-          <Surface style={styles.InfosRow}>
-            <Surface style={styles.TitleContainer}>
+        <Surface elevation={0} mode="flat" style={styles.Infos}>
+          <Surface elevation={0} mode="flat" style={styles.InfosRow}>
+            <Surface elevation={0} mode="flat" style={styles.TitleContainer}>
               <Text style={styles.Title}>{item.name}</Text>
               <Text style={styles.description}>{item.description}</Text>
             </Surface>
             {item.icon ? (
-              <Surface style={styles.IconContainer}>
+              <Surface elevation={0} mode="flat" style={styles.IconContainer}>
                 <IconButton icon={item.icon} color="black" onPress={() => {}} />
               </Surface>
             ) : (
-              <Surface style={styles.IconContainer}></Surface>
+              <Surface
+                elevation={0}
+                mode="flat"
+                style={styles.IconContainer}
+              ></Surface>
             )}
           </Surface>
 
-          <Surface>{/* Futur ajout d'une barre de progression */}</Surface>
+          <Surface style={styles.progressContainer} elevation={0} mode="flat">
+            <ProgressBar
+              progress={item.progress}
+              color={theme.colors.primary}
+              style={styles.progressBar}
+            />
+            {item.progress === 1 ? (
+              <Surface elevation={0} mode="flat" style={styles.check}>
+                <Text style={styles.percentageText}>{Math.round(item.progress * 100)}% terminé</Text>
+                <IconButton
+                  icon={"check-circle"}
+                  color={theme.colors.secondary}
+                />
+              </Surface>
+            ) : (
+              <Surface elevation={0} mode="flat" style={styles.check}>
+                <Text style={styles.percentageText}>{Math.round(item.progress * 100)}% terminé</Text>
+              </Surface>
+            )}
+          </Surface>
         </Surface>
       </Surface>
     </TouchableRipple>
@@ -43,12 +78,13 @@ export default CourseList = ({ data, navigation }) => {
     <FlatList
       data={data}
       renderItem={renderItem}
-      keyExtractor={(item) => item.id.toString()}
       contentContainerStyle={styles.listContent}
+      keyExtractor={(item) => item.id.toString()}
     />
   );
 };
 
+export default memo(CourseList);
 
 const getStyles = (theme) => {
   return StyleSheet.create({
@@ -61,7 +97,6 @@ const getStyles = (theme) => {
       paddingLeft: 10,
       display: "flex",
       flexDirection: "row",
-      height: 80,
     },
     Title: {
       fontWeight: "bold",
@@ -69,18 +104,21 @@ const getStyles = (theme) => {
     },
     TitleContainer: {
       flex: 1,
+      marginTop: 10,
+    },
+    ImageContainer: {
+      height: "100%",
+      alignItems: "center",
+      borderRadius: 0,
+      justifyContent: "flex-start",
     },
     Image: {
       width: 60,
       height: 60,
       alignItems: "center",
-      justifyContent: "center",
       margin: 10,
       borderRadius: 0,
-    },
-    Index: {
-      fontSize: 16,
-      fontWeight: "bold",
+      padding: 10,
     },
     Infos: {
       textAlign: "center",
@@ -98,5 +136,28 @@ const getStyles = (theme) => {
       alignItems: "center",
       justifyContent: "center",
     },
+    description: {
+      marginTop: 10,
+    },
+    progressContainer: {
+      marginTop: 20,
+      marginBottom: 10,
+      width: "100%",
+      borderRadius: 10,
+      flexDirection: "column",
+    },
+    progressBar: {
+      borderRadius: 5,
+    },
+    percentageText: {
+      marginTop: 10,
+      marginLeft: 5,
+      textAlign: "left",
+      paddingRight: 10,
+    },
+    check: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+    },
   });
-}
+};

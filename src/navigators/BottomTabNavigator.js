@@ -17,7 +17,7 @@ export default function BottomTabNavigator() {
       barStyle={{ backgroundColor: theme.colors.background }}
     >
       <Tab.Screen
-        name="HomeScreen"
+        name="Accueil"
         component={HomeScreen}
         options={{
           tabBarLabel: "Accueil",

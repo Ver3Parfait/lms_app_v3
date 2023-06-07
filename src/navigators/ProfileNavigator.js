@@ -11,7 +11,7 @@ const ProfileNavigator = () => {
       useLegacyImplementation={true}
       drawerContent={(props) => <DrawerContent {...props} />}
     >
-      <Drawer.Screen name="ProfileScreen" component={ProfileScreen} />
+      <Drawer.Screen name="Compte" component={ProfileScreen} />
     </Drawer.Navigator>
   );
 };

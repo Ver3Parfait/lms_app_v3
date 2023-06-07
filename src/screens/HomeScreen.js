@@ -13,11 +13,9 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CertificationCardComponent from "../components/CertificationCard.component";
 import HeaderPageComponent from "../components/HeaderPage.component";
 
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 export default function HomeScreen({ navigation }) {
   const theme = useTheme();
-  const insets = useSafeAreaInsets();
-  const styles = getStyles(theme, insets);
+  const styles = getStyles(theme);
   const [switchValue, setSwitchValue] = useState(1);
   const courses = [];
 
@@ -47,10 +45,10 @@ export default function HomeScreen({ navigation }) {
   };
 
   return (
-    <Surface style={styles.container}>
-      <HeaderPageComponent />
-      <Surface style={styles.scrollSurface}>
-        <Surface style={styles.header}>
+    <Surface elevation={1} mode="flat"  style={styles.container}>
+      <HeaderPageComponent Invisble/>
+      <Surface elevation={0} mode="flat"  style={styles.scrollSurface}>
+        <Surface elevation={0} mode="flat"  style={styles.header}>
           <Text style={styles.greeting}>
             Bonjour <Text style={styles.username}>Militello Lucas</Text>
           </Text>
@@ -67,7 +65,7 @@ export default function HomeScreen({ navigation }) {
           </TouchableRipple>
         </Surface>
 
-        <Surface style={styles.searchContainer}>
+        <Surface elevation={0} mode="flat"  style={styles.searchContainer}>
           <TextInput
             mode="outlined"
             label="Rechercher"
@@ -76,8 +74,8 @@ export default function HomeScreen({ navigation }) {
           />
         </Surface>
 
-        <Surface style={styles.switchContainer}>
-          <Surface style={styles.switchButtonGroup}>
+        <Surface elevation={0} mode="flat"  style={styles.switchContainer}>
+          <Surface elevation={0} mode="flat"  style={styles.switchButtonGroup}>
             <Button
               mode={switchValue === 1 ? "contained" : "outlined"}
               onPress={() => handleSwitchChange(1)}
@@ -95,14 +93,14 @@ export default function HomeScreen({ navigation }) {
           </Surface>
         </Surface>
 
-        <Surface style={styles.sectionContainer}>
+        <Surface elevation={0} mode="flat"  style={styles.sectionContainer}>
           {switchValue === 1 ? (
-            <Text style={styles.sectionTitle}>Les plus consultée</Text>
+            <Text style={styles.sectionTitle}>Mes Favoris</Text>
           ) : (
-            <Text style={styles.sectionTitle}>Les derniers cours</Text>
+            <Text style={styles.sectionTitle}>Continuer</Text>
           )}
           <TouchableRipple
-            onPress={() => navigation.navigate("CourseNavigator")}
+            onPress={() => navigation.navigate("Formations")}
           >
             <Text style={styles.sectionLink}>Tout voir</Text>
           </TouchableRipple>
@@ -115,17 +113,14 @@ export default function HomeScreen({ navigation }) {
     </Surface>
   );
 }
-HomeScreen.navigationOptions = {
-  title: "Accueil", // Titre de l'écran
-};
-const getStyles = (theme, insets) => {
+
+const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
       height: "100%",
-      paddingTop: insets.top
     },
     scrollSurface: {
-      height: "100%",
+      height:'90%',
       padding: 20,
     },
     header: {
@@ -135,11 +130,12 @@ const getStyles = (theme, insets) => {
       marginBottom: 20,
     },
     greeting: {
-      fontSize: 24,
+      fontSize: 25,
       fontWeight: "bold",
-      color: "#000",
+      color:theme.colors.primary,
     },
     username: {
+      fontSize: 20,
       marginLeft: 10,
     },
     avatar: {
@@ -177,7 +173,7 @@ const getStyles = (theme, insets) => {
       fontWeight: "bold",
     },
     sectionLink: {
-      color: "#0d47a1",
+      color: theme.colors.secondary,
     },
     CourseCard: {
       marginBottom: 10,
@@ -193,8 +189,6 @@ const getStyles = (theme, insets) => {
       marginBottom: 8,
       fontSize: 16,
     },
-    CourseDescription: {
-      color: "#555",
-    },
+
   });
 };

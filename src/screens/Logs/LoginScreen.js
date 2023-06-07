@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
-import { ActivityIndicator, TextInput, Text, useTheme, Surface } from "react-native-paper";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ActivityIndicator, TextInput, Text, useTheme, Surface} from "react-native-paper";
 
 const LoginScreen = ({ navigation }) => {
   const themes = useTheme();
@@ -33,8 +32,8 @@ const LoginScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={styles.view}>
-      <Surface style={styles.container}>
+
+      <Surface elevation={1} mode="flat"  style={styles.container}>
         {
           loading ? (
             <>
@@ -87,7 +86,6 @@ const LoginScreen = ({ navigation }) => {
             </>
           )}
       </Surface>
-    </SafeAreaView>
   );
 };
 

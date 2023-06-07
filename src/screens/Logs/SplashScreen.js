@@ -20,7 +20,7 @@ const SplashScreen = ({ navigation }) => {
                 } else if (res.status == 200) {
                     await AsyncStorage.setItem("id", res.data.id.toString());
                     let response = await AuthServices.RefreshToken()
-                    await AsyncStorage.setItem('token', response.token)
+                    await AsyncStorage.setItem('token', response.data.token)
                     navigation.navigate('BottomTabNavigator')
                 }
             }
@@ -32,13 +32,13 @@ const SplashScreen = ({ navigation }) => {
     useEffect(() => { VerifyUser() }, [])
 
     return (
-        <Surface style={styles.container}>
-            <Image
-                resizeMode='contain'
-                style={styles.image}
-                source={require('../../../assets/logoRI7.png')}
-            />
-        </Surface>
+            <Surface elevation={1} mode="flat"  style={styles.container}>
+                <Image
+                    resizeMode='contain'
+                    style={styles.image}
+                    source={require('../../../assets/logoRI7.png')}
+                />
+            </Surface>
     )
 }
 
