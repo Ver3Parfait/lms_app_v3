@@ -8,7 +8,7 @@ const CertificationApi = createApi({
         baseUrl: `${API_URL}`,
         prepareHeaders: (headers) => {
             let token = AsyncStorage.getItem('token');
-            headers.set('Content-Type', 'application/json')
+            headers.set('Accept', 'application/json')
             headers.set('Authorization', `Bearer ${token}`)
             return headers
         }

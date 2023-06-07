@@ -49,7 +49,7 @@ const LoginScreen = ({ navigation }) => {
                 source={require('../../../assets/logoRI7.png')}
               />
               <Text
-                variant="displayMedium"
+                variant="headlineLarge"
                 style={styles.text}
               >
                 connexion
@@ -96,7 +96,7 @@ export default LoginScreen;
 const getStyles = (themes) => {
   return StyleSheet.create({
     view: {
-      backgroundColor:themes.colors.surface,
+      backgroundColor: themes.colors.surface,
     },
     container: {
       justifyContent: "center",
@@ -107,8 +107,9 @@ const getStyles = (themes) => {
     text: {
       textTransform: "uppercase",
       marginVertical: 10,
-      fontWeight: "400",
-      color:themes.colors.primary
+      fontWeight: "500",
+      color: themes.colors.primary,
+      fontFamily: 'Helvetica-Bold'
     },
     input: {
       marginTop: 20,
