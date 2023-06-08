@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Text,
   IconButton,
@@ -10,7 +9,7 @@ import {
 import { FlatList, StyleSheet, Image } from "react-native";
 import { memo } from "react";
 
-const CourseList = ({ data, navigation }) => {
+const CourseList = async ({ data, navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -57,7 +56,9 @@ const CourseList = ({ data, navigation }) => {
             />
             {item.progress === 1 ? (
               <Surface elevation={0} mode="flat" style={styles.check}>
-                <Text style={styles.percentageText}>{Math.round(item.progress * 100)}% terminé</Text>
+                <Text style={styles.percentageText}>
+                  {Math.round(item.progress * 100)}% terminé
+                </Text>
                 <IconButton
                   icon={"check-circle"}
                   color={theme.colors.secondary}
@@ -65,7 +66,9 @@ const CourseList = ({ data, navigation }) => {
               </Surface>
             ) : (
               <Surface elevation={0} mode="flat" style={styles.check}>
-                <Text style={styles.percentageText}>{Math.round(item.progress * 100)}% terminé</Text>
+                <Text style={styles.percentageText}>
+                  {Math.round(item.progress * 100)}% terminé
+                </Text>
               </Surface>
             )}
           </Surface>

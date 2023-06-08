@@ -2,28 +2,58 @@ import { StyleSheet, FlatList } from "react-native";
 import { memo } from "react";
 import { Card, Surface, Text } from "react-native-paper";
 import { useTheme } from "react-native-paper";
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
+import { API_URL } from "@env";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const CertificationCard = ({ data }) => {
   const navigation = useNavigation();
   const theme = useTheme();
   const styles = getStyles(theme);
+
+  const removeCertificationId = async () => {
+    try {
+      await AsyncStorage.removeItem("Certification_id");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const storeCertificationId = async (id) => {
+    try {
+      await AsyncStorage.setItem("Certification_id", id.toString());
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const renderItem = ({ item }) => (
     <Card
       key={item.id}
       style={styles.CourseCard}
-      onPress={() =>
-        navigation.navigate("Cours", { CertificationCoursesId: item.id })
-      }
+      onPress={() => {
+        removeCertificationId(); 
+        storeCertificationId(item.id); 
+        navigation.navigate("Cours"); 
+      }}
       elevation={1}
     >
-      <Card.Cover  source={{ uri: item.imageUrl }} style={styles.CourseImage} />
+      <Card.Cover
+        source={{ uri: `${API_URL}/uploads/${item.mainPhoto}` }}
+        style={styles.CourseImage}
+      />
       <Card.Content>
         <Text style={styles.CourseTitle}>{item.name}</Text>
-        <Surface elevation={0} mode="flat"  style={styles.descriptionContainer}>
+        <Surface elevation={0} mode="flat" style={styles.descriptionContainer}>
           <Text style={styles.CourseDescription}>{item.description}</Text>
-          <Text style={styles.CourseDescription}>{item.duration} heures</Text>
-          <Text style={styles.CourseDescription}>{item.coursesNumbers} cours</Text>
+          <Surface elevation={0} mode="flat" style={styles.row}>
+            <Text style={styles.CourseDescription}>
+              {item.totalHourDuration} heures
+            </Text>
+            <Text style={styles.CourseDescription}>
+              {item.certificationCourses ? item.certificationCourses.length : 0} cours
+            </Text>
+          </Surface>
         </Surface>
       </Card.Content>
     </Card>
@@ -38,18 +68,19 @@ const CertificationCard = ({ data }) => {
   );
 };
 
-export default memo(CertificationCard)
+export default memo(CertificationCard);
+
 const getStyles = (theme) => {
   return StyleSheet.create({
     descriptionContainer: {
-      flexDirection: "row",
+      flexDirection: "column",
       justifyContent: "space-around",
     },
     CourseCard: {
       marginBottom: 10,
       borderRadius: 10,
-      padding:10,
-      backgroundColor:theme.colors.background
+      padding: 10,
+      backgroundColor: theme.colors.background,
     },
     CourseImage: {
       height: 200,
@@ -57,7 +88,7 @@ const getStyles = (theme) => {
       borderTopRightRadius: 10,
     },
     CourseTitle: {
-      color:theme.colors.primary,
+      color: theme.colors.primary,
       marginTop: 20,
       textAlign: "center",
       fontWeight: "bold",
@@ -67,5 +98,11 @@ const getStyles = (theme) => {
     CourseDescription: {
       textAlign: "center",
     },
+    row: {
+      marginTop:20,
+      flexDirection:'row',
+      alignItems:'center',
+      justifyContent:'space-around'
+    }
   });
 };

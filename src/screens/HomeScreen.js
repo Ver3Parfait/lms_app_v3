@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyleSheet } from "react-native";
 import {
   Text,
@@ -12,38 +12,27 @@ import {
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import CertificationCardComponent from "../components/CertificationCard.component";
 import HeaderPageComponent from "../components/HeaderPage.component";
+import CertificationsServices from "../api/services/certifications.services";
 
 export default function HomeScreen({ navigation }) {
+  const [switchValue, setSwitchValue] = useState(1);
+  const [data, setData] = useState([])
   const theme = useTheme();
   const styles = getStyles(theme);
-  const [switchValue, setSwitchValue] = useState(1);
-  const courses = [];
 
-  for (let i = 0; i < 7; i++) {
-    courses.push({
-      id: i + 1,
-      name: "Introduction à React Native",
-      description: "Maonni Pascal",
-      imageUrl:
-        "https://mimir.ri7.fr/uploads/certification/banniere-1200x628-6331a44540fa9.jpg",
-    });
-  }
-  const latestCourses = [];
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await CertificationsServices.Certifications();
+      setData(response.data);
+    };
 
-  for (let i = 0; i < 7; i++) {
-    latestCourses.push({
-      id: i + 1,
-      name: "Cours avancer de React Native Hardcore",
-      description: "Fabien Walle",
-      imageUrl:
-        "https://images.ctfassets.net/aq13lwl6616q/2gqVi4hhjq9vgvdh63UoKZ/c763c6f7e98a80eb2800bbe5eb9d690d/react_native_zero_to_mastery.png",
-    });
-  }
+    fetchData();
+  }, []);
 
   const handleSwitchChange = (value) => {
     setSwitchValue(value);
   };
-
+  
   return (
     <Surface elevation={1} mode="flat"  style={styles.container}>
       <HeaderPageComponent Invisble/>
@@ -107,7 +96,7 @@ export default function HomeScreen({ navigation }) {
         </Surface>
 
         <CertificationCardComponent
-          data={switchValue === 1 ? courses : latestCourses}
+          data={switchValue === 1 ? data : data}
         />
       </Surface>
     </Surface>

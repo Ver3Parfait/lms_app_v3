@@ -3,7 +3,6 @@ import { Image, StyleSheet, TouchableOpacity } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import AuthServices from "../../api/services/auth.services";
 import { ActivityIndicator, TextInput, Text, useTheme, Surface} from "react-native-paper";
-import HeaderPageComponent from "../../components/HeaderPage.component";
 
 const LoginScreen = ({ navigation }) => {
   const themes = useTheme();
@@ -35,7 +34,6 @@ const LoginScreen = ({ navigation }) => {
   return (
 
       <Surface elevation={1} mode="flat"  style={styles.container}>
-        <HeaderPageComponent Invisble/>
         {
           loading ? (
             <>
@@ -109,7 +107,6 @@ const getStyles = (themes) => {
       marginVertical: 10,
       fontWeight: "500",
       color: themes.colors.primary,
-      fontFamily: 'Helvetica-Bold'
     },
     input: {
       marginTop: 20,
@@ -121,7 +118,6 @@ const getStyles = (themes) => {
       justifyContent: 'center',
       paddingVertical: 12,
       paddingHorizontal: 32,
-      elevation: themes.colors.surface,
       width: "100%"
     },
     signInText: {
