@@ -1,49 +1,71 @@
-import { StyleSheet } from "react-native";
-import { Surface, useTheme } from "react-native-paper";
-import CourseListComponent from '../../components/CourseList.component'
+import { FlatList, StyleSheet } from "react-native";
+import { Surface, useTheme, TouchableRipple, Image } from "react-native-paper";
 import HeaderPageComponent from "../../components/HeaderPage.component";
+import { useState, useEffect } from 'react'
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import CertificationsServices from "../../api/services/certifications.services";
 
 export default CertificationCoursesScreen = ({ navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
-  const data = [];
+  const [certificationCoursesList, setCertificationCoursesList] = useState()
 
-  for (let i = 0; i < 30; i++) {
-    let coursesType = ""
-    let imageUrl = ""
-    let randomNumber = Math.floor(Math.random() * 5) + 1
-    if (randomNumber === 1) {
-      coursesType = "HTML"
-      imageUrl = "https://cdn-icons-png.flaticon.com/512/732/732212.png"
-    }else if (randomNumber === 2){
-      coursesType = "CSS"
-      imageUrl = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/CSS3_logo.svg/2048px-CSS3_logo.svg.png"
-    }else if (randomNumber === 3){
-      coursesType = "JavaScript"
-      imageUrl = "https://upload.wikimedia.org/wikipedia/commons/6/6a/JavaScript-logo.png"
-    }else if (randomNumber === 4){
-      coursesType = "PHP"
-      imageUrl = "https://courenligne.com/uploads/cours/62f0e7309be16/995e849805a9dc70074081bad5f1542f.png"
-    }else{
-      coursesType = "React"
-      imageUrl = "https://ionicframework.com/docs/icons/logo-react-icon.png"
+  const FetchCertificationCourses = async () => {
+    try {
+      let res = await CertificationsServices.CertificationCourses()
+      let data = res.data.map(item => item)
+      setCertificationCoursesList(data);
+    } catch (err) {
+      console.log(err);
     }
-    const progress = parseFloat((Math.random() * 1).toFixed(1)) ;
-    data.push({
-      id: i + 1,
-      progress: progress,
-      name: coursesType,
-      description: "Militello Lucas",
-      duration:'20 minutes',
-      imageUrl
-      // index: i + 1,
-    });
   }
 
+  useEffect(() => {
+    FetchCertificationCourses();
+  }, [])
+
   return (
-    <Surface elevation={1} mode="flat"  style={styles.container}>
-      <HeaderPageComponent/>
-      <CourseListComponent navigation={navigation} data={data}/>
+    <Surface elevation={1} mode="flat" style={styles.container}>
+      <HeaderPageComponent />
+      <FlatList
+        data={certificationCoursesList}
+        renderItem={
+          <TouchableRipple
+            key={item.id.toString()}
+            onPress={async () => {
+              await AsyncStorage.removeItem('Course_id')
+              await AsyncStorage.setItem('Course_id', item.id.toString())
+              navigation.navigate("CourseScreen")
+            }
+            }
+          >
+            <Surface elevation={0} mode="flat" style={styles.container}>
+              <Surface elevation={0} mode="flat" style={styles.Infos}>
+                <Surface elevation={0} mode="flat" style={styles.InfosRow}>
+                  <Surface elevation={0} mode="flat" style={styles.TitleContainer}>
+                    <Text style={styles.Title}>{item.name}</Text>
+                  </Surface>
+                </Surface>
+
+                {/*
+                bloc image 
+                <Surface elevation={0} mode="flat" style={styles.ImageContainer}>
+                <Image style={styles.Image} source={{ uri: item.imageUrl }} />
+              </Surface>
+
+              bloc barre de progression
+                <Surface style={styles.progressContainer} elevation={0} mode="flat">
+                  <ProgressBar
+                    progress={item.progress}
+                    color={theme.colors.primary}
+                    style={styles.progressBar}
+                  />
+                </Surface> */}
+              </Surface>
+            </Surface>
+          </TouchableRipple>
+        } />
+
     </Surface>
 
   );
@@ -51,8 +73,79 @@ export default CertificationCoursesScreen = ({ navigation }) => {
 const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
-      height:"100%",
+      height: "100%",
       flexDirection: "column",
+    },
+    listContent: {
+      paddingVertical: 10,
+    },
+    container: {
+      justifyContent: "space-between",
+      alignItems: "center",
+      paddingLeft: 10,
+      display: "flex",
+      flexDirection: "row",
+    },
+    Title: {
+      fontWeight: "bold",
+      fontSize: 13.5,
+    },
+    TitleContainer: {
+      flex: 1,
+      marginTop: 10,
+    },
+    ImageContainer: {
+      height: "100%",
+      alignItems: "center",
+      borderRadius: 0,
+      justifyContent: "flex-start",
+    },
+    Image: {
+      width: 60,
+      height: 60,
+      alignItems: "center",
+      margin: 10,
+      borderRadius: 0,
+      padding: 10,
+    },
+    Infos: {
+      textAlign: "center",
+      flex: 1,
+      paddingRight: 10,
+    },
+    InfosRow: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
+    },
+    IconContainer: {
+      width: 20,
+      height: 20,
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    description: {
+      marginTop: 10,
+    },
+    progressContainer: {
+      marginTop: 20,
+      marginBottom: 10,
+      width: "100%",
+      borderRadius: 10,
+      flexDirection: "column",
+    },
+    progressBar: {
+      borderRadius: 5,
+    },
+    percentageText: {
+      marginTop: 10,
+      marginLeft: 5,
+      textAlign: "left",
+      paddingRight: 10,
+    },
+    check: {
+      flexDirection: "row",
+      justifyContent: "space-between",
     },
   });
 }

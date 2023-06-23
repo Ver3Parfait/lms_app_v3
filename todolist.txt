@@ -1,0 +1,3 @@
+renommer coursescreen en learningresourcesscreen
+faire l'accordion dans CertificationCoursesScreen
+mise à jour de la route "certification_courses" sur apiplatform : liste des LR dans la course

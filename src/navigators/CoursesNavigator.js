@@ -8,21 +8,21 @@ const CourseStack = createStackNavigator();
 export default CoursesNavigator = () => {
   return (
     <CourseStack.Navigator
-      initialRouteName="Formations"
+      initialRouteName="CertificationsScreen"
       screenOptions={{ headerTitleAlign: "center", headerShown:false }}
     >
       <CourseStack.Screen
-        name="Formations"
+        name="CertificationsScreen"
         component={CertificationScreen}
         options={{ title: "Formations" }}
       />
       <CourseStack.Screen
-        name="Cours"
+        name="CertificationCoursesScreen"
         component={CertificationCoursesScreen}
         options={{ title: "Détails de la formation" }}
       />
       <CourseStack.Screen
-        name="Vidéo"
+        name="CourseScreen"
         component={CourseScreen}
         options={{ title: "Détail du cours" }}
       />
