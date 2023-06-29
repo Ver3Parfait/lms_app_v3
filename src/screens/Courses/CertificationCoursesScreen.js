@@ -11,22 +11,6 @@ const CertificationCoursesScreen = ({ navigation }) => {
   const [certificationCoursesList, setCertificationCoursesList] = useState()
   const [expandedItems, setExpandedItems] = useState([]);
 
-  let testData = [{
-    "id": 81,
-    "name": "Cours1: PHP",
-    "learningResourceIndex": 1
-  },
-  {
-    "id": 84,
-    "name": "Correction-TD: Les conditions (PHP)",
-    "learningResourceIndex": 2
-  },
-  {
-    "id": 85,
-    "name": "Correction-TD: Les boucles (PHP)",
-    "learningResourceIndex": 3
-  }]
-
   const handleAccordionToggle = (item) => {
     const index = expandedItems.indexOf(item.id);
     if (index > -1) {
@@ -72,7 +56,7 @@ const CertificationCoursesScreen = ({ navigation }) => {
                   expanded={expandedItems.includes(item1.id)}
                   onPress={() => handleAccordionToggle(item1)}>
                   <FlatList
-                    data={testData}
+                    data={item1.learningResources}
                     renderItem={({ item: item2 }) => (
                       <Surface elevation={0} mode="flat">
                         <List.Item
