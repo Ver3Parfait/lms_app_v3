@@ -13,7 +13,6 @@ const CertificationCourses = async (data) => {
 
 const Course = async (data) => {
   const Course_id = await AsyncStorage.getItem("Course_id");
-  if (Course_id == 1 || Course_id == 2 || Course_id == 0) { Course_id = 3 }
   return api.get(`/api/courses/${Course_id}`, data)
 };
 

@@ -9,7 +9,7 @@ export default CoursesNavigator = () => {
   return (
     <CourseStack.Navigator
       initialRouteName="CertificationsScreen"
-      screenOptions={{ headerTitleAlign: "center", headerShown:false }}
+      screenOptions={{ headerShown:false }}
     >
       <CourseStack.Screen
         name="CertificationsScreen"

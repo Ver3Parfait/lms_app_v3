@@ -10,13 +10,13 @@ export default HeaderPage = ({ Icon = "arrow-left-circle", Drawer = null, Invisb
   const styles = getStyles(theme, insets);
 
   const route = useRoute();
-  const routeName = route.name;
+  const routeName = translateRouteName(route.name); // Traduction du nom de route
 
   return (
     <Surface elevation={0} mode="flat" style={styles.container}>
       <Surface elevation={0} mode="flat" style={styles.leftContainer}>
         <IconButton
-          icon={Invisble ? false : Icon} 
+          icon={Invisble ? false : Icon}
           color={theme.colors.primary}
           size={25}
           onPress={Drawer ? () => navigation.openDrawer() : () => navigation.goBack()}
@@ -28,6 +28,15 @@ export default HeaderPage = ({ Icon = "arrow-left-circle", Drawer = null, Invisb
       <Surface elevation={0} mode="flat" style={styles.rightContainer} />
     </Surface>
   );
+};
+
+const translateRouteName = (routeName) => {
+  const translations = {
+    CertificationsScreen: "Mes Formations",
+    CertificationCoursesScreen: "Détails de la formation",
+    CourseScreen: "Mes cours",
+  };
+  return translations[routeName] || routeName;
 };
 
 const getStyles = (theme, insets) => {

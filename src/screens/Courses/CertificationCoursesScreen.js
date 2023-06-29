@@ -1,14 +1,40 @@
 import { FlatList, StyleSheet } from "react-native";
-import { Surface, useTheme, TouchableRipple, Image } from "react-native-paper";
+import { Surface, useTheme, List, Text } from "react-native-paper";
 import HeaderPageComponent from "../../components/HeaderPage.component";
 import { useState, useEffect } from 'react'
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import CertificationsServices from "../../api/services/certifications.services";
 
-export default CertificationCoursesScreen = ({ navigation }) => {
+const CertificationCoursesScreen = ({ navigation }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
   const [certificationCoursesList, setCertificationCoursesList] = useState()
+  const [expandedItems, setExpandedItems] = useState([]);
+
+  let testData = [{
+    "id": 81,
+    "name": "Cours1: PHP",
+    "learningResourceIndex": 1
+  },
+  {
+    "id": 84,
+    "name": "Correction-TD: Les conditions (PHP)",
+    "learningResourceIndex": 2
+  },
+  {
+    "id": 85,
+    "name": "Correction-TD: Les boucles (PHP)",
+    "learningResourceIndex": 3
+  }]
+
+  const handleAccordionToggle = (item) => {
+    const index = expandedItems.indexOf(item.id);
+    if (index > -1) {
+      setExpandedItems(prevState => prevState.filter(id => id !== item.id));
+    } else {
+      setExpandedItems(prevState => [...prevState, item.id]);
+    }
+  };
 
   const FetchCertificationCourses = async () => {
     try {
@@ -24,67 +50,64 @@ export default CertificationCoursesScreen = ({ navigation }) => {
     FetchCertificationCourses();
   }, [])
 
+
   return (
-    <Surface elevation={1} mode="flat" style={styles.container}>
+    <Surface elevation={0} mode="flat" style={styles.container}>
       <HeaderPageComponent />
       <FlatList
         data={certificationCoursesList}
-        renderItem={
-          <TouchableRipple
-            key={item.id.toString()}
-            onPress={async () => {
-              await AsyncStorage.removeItem('Course_id')
-              await AsyncStorage.setItem('Course_id', item.id.toString())
-              navigation.navigate("CourseScreen")
-            }
-            }
-          >
-            <Surface elevation={0} mode="flat" style={styles.container}>
-              <Surface elevation={0} mode="flat" style={styles.Infos}>
-                <Surface elevation={0} mode="flat" style={styles.InfosRow}>
-                  <Surface elevation={0} mode="flat" style={styles.TitleContainer}>
-                    <Text style={styles.Title}>{item.name}</Text>
-                  </Surface>
-                </Surface>
-
-                {/*
-                bloc image 
-                <Surface elevation={0} mode="flat" style={styles.ImageContainer}>
-                <Image style={styles.Image} source={{ uri: item.imageUrl }} />
-              </Surface>
-
-              bloc barre de progression
-                <Surface style={styles.progressContainer} elevation={0} mode="flat">
-                  <ProgressBar
-                    progress={item.progress}
-                    color={theme.colors.primary}
-                    style={styles.progressBar}
+        renderItem={({ item: item1 }) => (
+          <Surface elevation={1} mode="flat" >
+            <List.Section>
+              <Surface elevation={2} mode="flat">
+                <List.Accordion
+                  titleNumberOfLines={0}
+                  title={item1.name}
+                  titleStyle={styles.AccordionContent}
+                  left={props =>
+                    <Surface style={styles.IconContainer} elevation={1} mode="flat">
+                      <List.Icon {...props} style={styles.Icon} icon='react' />
+                    </Surface>
+                  }
+                  expanded={expandedItems.includes(item1.id)}
+                  onPress={() => handleAccordionToggle(item1)}>
+                  <FlatList
+                    data={testData}
+                    renderItem={({ item: item2 }) => (
+                      <Surface elevation={0} mode="flat">
+                        <List.Item
+                          description={item2.name}
+                          descriptionStyle={styles.ListContent}
+                          onPress={async () => {
+                            await AsyncStorage.removeItem('Course_id')
+                            await AsyncStorage.setItem('Course_id', item1.id.toString())
+                            navigation.navigate('CourseScreen')
+                          }} />
+                      </Surface>
+                    )}
+                    keyExtractor={item2 => item2.learningResourceIndex.toString()}
                   />
-                </Surface> */}
+                </List.Accordion>
               </Surface>
-            </Surface>
-          </TouchableRipple>
-        } />
-
-    </Surface>
-
+            </List.Section>
+          </Surface>
+        )}
+        keyExtractor={item => item.id.toString()}
+      />
+    </Surface >
   );
 };
+
+export default CertificationCoursesScreen
+
 const getStyles = (theme) => {
   return StyleSheet.create({
     container: {
       height: "100%",
       flexDirection: "column",
     },
-    listContent: {
-      paddingVertical: 10,
-    },
-    container: {
-      justifyContent: "space-between",
-      alignItems: "center",
-      paddingLeft: 10,
-      display: "flex",
-      flexDirection: "row",
+    AccordionContent: {
+      fontWeight: "bold"
     },
     Title: {
       fontWeight: "bold",
@@ -94,59 +117,21 @@ const getStyles = (theme) => {
       flex: 1,
       marginTop: 10,
     },
-    ImageContainer: {
-      height: "100%",
-      alignItems: "center",
-      borderRadius: 0,
-      justifyContent: "flex-start",
-    },
-    Image: {
-      width: 60,
-      height: 60,
-      alignItems: "center",
-      margin: 10,
-      borderRadius: 0,
-      padding: 10,
-    },
-    Infos: {
-      textAlign: "center",
-      flex: 1,
-      paddingRight: 10,
-    },
-    InfosRow: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      alignItems: "center",
-    },
     IconContainer: {
-      width: 20,
-      height: 20,
+      width: 30,
+      height: 40,
+      marginLeft: 10
+    },
+    Icon: {
       alignItems: "center",
+      flex: 1
+    },
+    ListContent: {
+      flex: 1,
       justifyContent: "center",
-    },
-    description: {
-      marginTop: 10,
-    },
-    progressContainer: {
-      marginTop: 20,
       marginBottom: 10,
-      width: "100%",
-      borderRadius: 10,
-      flexDirection: "column",
-    },
-    progressBar: {
-      borderRadius: 5,
-    },
-    percentageText: {
-      marginTop: 10,
-      marginLeft: 5,
-      textAlign: "left",
-      paddingRight: 10,
-    },
-    check: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
+      fontWeight:"700"
+    }
   });
 }
 

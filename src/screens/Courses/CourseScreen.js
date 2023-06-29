@@ -1,54 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, TouchableOpacity, Image } from "react-native";
-import { Surface, useTheme } from "react-native-paper";
+import { StyleSheet, TouchableOpacity, Image, FlatList } from "react-native";
+import { List, Surface, useTheme } from "react-native-paper";
 import Video, { getYoutubeMeta } from "react-native-youtube-iframe";
-import ListAccordionComponent from "../../components/ListAccordion.component.";
 import HeaderPageComponent from "../../components/HeaderPage.component";
+import CertificationsServices from "../../api/services/certifications.services";
 
-export default function CourseScreen() {
+const CourseScreen = () => {
   const [videoLoaded, setVideoLoaded] = useState(false);
   const [thumbnailUrl, setThumbnailUrl] = useState("");
+  const [CourseList, setCourseList] = useState([])
 
   const videoId = "WkwBzoo47ww";
   const theme = useTheme();
   const styles = getStyles(theme);
-  const data = [];
-  
-  useEffect(() => {
-    getYoutubeMeta(videoId).then((meta) => {
-      setThumbnailUrl(meta.thumbnail_url);
-    });
-  }, []);
 
-
-  for (let i = 0; i < 8; i++) {
-    const numCourses = Math.floor(Math.random() * 5) + 1; 
-    const courses = [];
-    for (let j = 0; j < numCourses; j++) {
-      let courseType = ""
-      const typeCourses = Math.floor(Math.random() * 3) + 1;
-      if (typeCourses === 1) {
-        courseType = "Page"
-      }else if (typeCourses === 2){
-        courseType = "Article"
-      }else{
-        courseType = "Quizz"
-      }
-      courses.push({
-        title: `Css Les bases N° ${j + 1}`,
-        index: courseType,
-      });
+  const FetchLearningResources = async () => {
+    try {
+      let res = await CertificationsServices.Course()
+      setCourseList(res.data)
+    } catch (error) {
+      console.log("Error fetching learning resources: ",error);
     }
-
-    data.push({
-      id: i + 1,
-      index: i + 1,
-      title:
-        "Mises à jour & Nouveaux Contenus en compagnie de Fabien Walle et Militello Lucas",
-      icon: "download",
-      courses: courses,
-    });
   }
+
+  useEffect(() => {
+    getYoutubeMeta(videoId)
+      .then((meta) => {
+        setThumbnailUrl(meta.thumbnail_url)
+      })
+      .then(()=>FetchLearningResources())
+  }, []);
 
   return (
     <Surface elevation={1} mode="flat" style={styles.container}>
@@ -69,11 +50,24 @@ export default function CourseScreen() {
         )}
       </Surface>
       <Surface elevation={0} mode="flat" style={styles.CourseList}>
-        <ListAccordionComponent data={data} />
+        <List.Section>
+        <List.Subheader style={styles.subheader}>{CourseList.name}</List.Subheader>
+          <FlatList
+            data={CourseList.learningResources}
+            renderItem={({ item }) => (
+              <List.Item
+                title={item?.name}
+                left={props => <List.Icon {...props} icon='react' />}
+              />
+            )}
+          />
+        </List.Section>
       </Surface>
     </Surface>
   );
 }
+
+export default CourseScreen
 
 const getStyles = (theme) => {
   return StyleSheet.create({
@@ -90,5 +84,11 @@ const getStyles = (theme) => {
       height: 225,
       width: "100%",
     },
+    subheader : {
+      alignSelf:"center",
+      fontWeight:"bold",
+      fontSize:20,
+      textTransform:"uppercase"
+    }
   });
 };

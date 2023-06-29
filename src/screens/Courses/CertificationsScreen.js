@@ -23,36 +23,37 @@ const CertificationsScreen = ({ navigation }) => {
   useEffect(() => {
     FetchCertifications();
   }, [])
-  
+
   return (
     <Surface elevation={1} mode="flat" style={styles.container}>
       <HeaderPageComponent Invisble />
       <Surface style={styles.view}>
         <FlatList
           data={certificationsList}
-          renderItem={({item})=>(
+          renderItem={({ item }) => (
             <Card
-            key={item.id}
-            style={styles.CourseCard}
-            onPress={async () => {
-              await AsyncStorage.setItem('Certification_id', item.id.toString())
-              navigation.navigate('CertificationCoursesScreen')
-            }
-            }
-            elevation={1}
-          >
-            <Card.Cover
-              source={{ uri: `http://mimir.ri7.fr/uploads/${item.mainPhoto}` }}
-              style={styles.CourseImage} />
-            <Card.Content>
-              <Text style={styles.CourseTitle}>{item.name}</Text>
-              <Surface elevation={0} mode="flat" style={styles.descriptionContainer}>
-                <Text style={styles.CourseDescription}>{item.description}</Text>
-                <Text style={styles.CourseDescription}>{item.totalHourDuration} heures</Text>
-              </Surface>
-            </Card.Content>
-          </Card>
-  )}
+              key={item.id}
+              style={styles.CourseCard}
+              onPress={async () => {
+                await AsyncStorage.removeItem('Certification_id')
+                await AsyncStorage.setItem('Certification_id', item.id.toString())
+                navigation.navigate('CertificationCoursesScreen')
+              }
+              }
+              elevation={1}
+            >
+              <Card.Cover
+                source={{ uri: `http://mimir.ri7.fr/uploads/${item.mainPhoto}` }}
+                style={styles.CourseImage} />
+              <Card.Content>
+                <Text style={styles.CourseTitle}>{item.name}</Text>
+                <Surface elevation={0} mode="flat" style={styles.descriptionContainer}>
+                  <Text style={styles.CourseDescription}>{item.description}</Text>
+                  <Text style={styles.CourseDescription}>{item.totalHourDuration} heures</Text>
+                </Surface>
+              </Card.Content>
+            </Card>
+          )}
           keyExtractor={item => item.id.toString()}
         />
       </Surface>
@@ -94,7 +95,7 @@ const getStyles = (theme) => {
     },
     CourseDescription: {
       textAlign: "center",
-      marginBottom:10
+      marginBottom: 10
     },
   });
 };
